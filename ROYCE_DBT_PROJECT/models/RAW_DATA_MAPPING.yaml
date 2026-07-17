@@ -8,10 +8,10 @@ sources:
 
     tables:
       - name: AWS_ROYCE_PRODUCTS_DATA
-        description: Product master data containing transactions and item-by-item data
+        description: Product sales transaction and item-level data
 
       - name: AWS_ROYCE_PRODUCT_ITEMS
-        description: Product details, IDs, and classifications
+        description: Product details, identifiers, and classifications
 
       - name: AWS_ROYCE_RESTAURANT_REVIEWS
         description: Customer restaurant review data
@@ -20,19 +20,103 @@ sources:
         description: Customer or loyalty member data
 
       - name: AWS_ROYCE_UNI_AU_HOLIDAYS
-        description: Australian public holiday 
+        description: Australian public holiday reference data
 
       - name: AWS_ROYCE_UNI_DATE
-        description: Date dimension 
+        description: Date dimension reference data
 
       - name: AWS_ROYCE_UNI_RESTAURANTS
-        description: Restaurant or store location
+        description: Restaurant or store location reference data
 
       - name: AWS_ROYCE_UNI_SALE_CHANNEL
-        description: Sales channel 
+        description: Sales channel reference data
 
       - name: AWS_ROYCE_UNI_SALE_TYPE
-        description: Sales type 
+        description: Sales type reference data
 
       - name: AWS_ROYCE_UNI_TIME
-        description: Time dimension 
+        description: Time dimension reference data
+
+      - name: OPS_DIM_EMPLOYEES
+        description: Employee master data for staffing and labour analysis
+
+      - name: OPS_DIM_SUPPLIERS
+        description: Supplier master data for procurement and delivery analysis
+
+      - name: OPS_FACT_EMPLOYEE_SHIFTS
+        description: Employee shift schedules and worked shift records
+
+      - name: OPS_FACT_INVENTORY_DAILY
+        description: Daily inventory balances, movements, and stock levels
+
+      - name: OPS_FACT_LABOUR_DAILY
+        description: Daily labour hours, overtime, and labour cost data
+
+      - name: OPS_FACT_PURCHASE_ORDERS
+        description: Purchase order transactions raised with suppliers
+
+      - name: OPS_FACT_SUPPLIER_DELIVERIES
+        description: Supplier delivery records including expected and actual delivery details
+
+      - name: OPS_FACT_WASTAGE_EVENTS
+        description: Inventory wastage events, quantities, reasons, and costs
+
+  - name: STG_DATA
+    description: Cleaned staging data used by intermediate and mart models
+    database: PORTFOLIO_DB
+    schema: STAGING
+
+    tables:
+      - name: STG_CUSTOMER_REVIEWS
+        description: Cleaned customer restaurant review data
+
+      - name: STG_DIM_DATE
+        description: Cleaned date dimension data
+
+      - name: STG_DIM_PUBLIC_HOLIDAYS
+        description: Cleaned Australian public holiday reference data
+
+      - name: STG_DIM_RESTAURANTS
+        description: Cleaned restaurant and store reference data
+
+      - name: STG_DIM_SALES_CHANNEL
+        description: Cleaned sales channel reference data
+
+      - name: STG_DIM_SALES_TYPE
+        description: Cleaned sales type reference data
+
+      - name: STG_DIM_TIME
+        description: Cleaned time dimension data
+
+      - name: STG_MEMBER_PROFILE
+        description: Cleaned customer and loyalty member profile data
+
+      - name: STG_PRODUCT_CODE
+        description: Cleaned product code and classification data
+
+      - name: STG_PRODUCT_DATA
+        description: Cleaned product transaction and item-level data
+
+      - name: STG_OPS_DIM_EMPLOYEES
+        description: Cleaned employee master data
+
+      - name: STG_OPS_DIM_SUPPLIERS
+        description: Cleaned supplier master data
+
+      - name: STG_OPS_FACT_EMPLOYEE_SHIFTS
+        description: Cleaned employee shift and attendance records
+
+      - name: STG_OPS_FACT_INVENTORY_DAILY
+        description: Cleaned daily inventory movement and stock data
+
+      - name: STG_OPS_FACT_LABOUR_DAILY
+        description: Cleaned daily labour hours and labour cost data
+
+      - name: STG_OPS_FACT_PURCHASE_ORDERS
+        description: Cleaned purchase order transaction data
+
+      - name: STG_OPS_FACT_SUPPLIER_DELIVERIES
+        description: Cleaned supplier delivery and OTIF data
+
+      - name: STG_OPS_FACT_WASTAGE_EVENTS
+        description: Cleaned inventory wastage event data
