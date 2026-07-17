@@ -1,0 +1,10 @@
+ROYCE_DBT_PROJECT:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      role: ROYCE_DEV
+      warehouse: ROYCE_WH
+      database: PORTFOLIO_DB
+      schema: STAGING
+      threads: 8
