@@ -1,0 +1,38 @@
+version: 2
+
+sources:
+  - name: RAW_DATA
+    description: Raw portfolio data loaded from AWS S3 into Snowflake
+    database: PORTFOLIO_DB_RAW
+    schema: RAW
+
+    tables:
+      - name: AWS_ROYCE_PRODUCTS_DATA
+        description: Product master data containing transactions and item-by-item data
+
+      - name: AWS_ROYCE_PRODUCT_ITEMS
+        description: Product details, IDs, and classifications
+
+      - name: AWS_ROYCE_RESTAURANT_REVIEWS
+        description: Customer restaurant review data
+
+      - name: AWS_ROYCE_SAMPLE_MEMBERS
+        description: Customer or loyalty member data
+
+      - name: AWS_ROYCE_UNI_AU_HOLIDAYS
+        description: Australian public holiday 
+
+      - name: AWS_ROYCE_UNI_DATE
+        description: Date dimension 
+
+      - name: AWS_ROYCE_UNI_RESTAURANTS
+        description: Restaurant or store location
+
+      - name: AWS_ROYCE_UNI_SALE_CHANNEL
+        description: Sales channel 
+
+      - name: AWS_ROYCE_UNI_SALE_TYPE
+        description: Sales type 
+
+      - name: AWS_ROYCE_UNI_TIME
+        description: Time dimension 
