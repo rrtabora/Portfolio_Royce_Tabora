@@ -1,0 +1,36 @@
+KPI_VISUAL_TEMPLATE =
+
+VAR CurrentValue   = <MEASURE_1>
+VAR LastYearValue  = <MEASURE_2>
+
+
+
+
+
+
+
+
+
+
+//LAYOUT PATTERN FOR KPI
+VAR DollarVariance = CurrentValue - LastYearValue
+VAR PctVariance    = DIVIDE ( DollarVariance, LastYearValue )
+VAR IsPositive     = DollarVariance >= 0
+VAR ArrowChar      = IF ( IsPositive, "&#9650;", "&#9660;" )
+VAR VarColor       = IF ( IsPositive, "#067647", "#B42318" )
+VAR BadgeBg        = IF ( IsPositive, "#ECFDF3", "#FEF3F2" )
+VAR FmtCurrent     = "$" & FORMAT ( CurrentValue, "#,##0" )
+VAR FmtLastYear    = "$" & FORMAT ( LastYearValue, "#,##0" )
+VAR FmtDollarVar   = IF ( IsPositive, "+$", "-$" ) & FORMAT ( ABS ( DollarVariance ), "#,##0" )
+VAR FmtPctVar      = IF ( IsPositive, "+", "-" ) & FORMAT ( ABS ( PctVariance ), "0.0%" )
+RETURN
+"<div style='font-family:Segoe UI,Tahoma,Arial,sans-serif;background:#FFFFFF;border:1px solid #E3E6EA;border-radius:8px;padding:16px 20px;height:100%;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;'>" &
+
+  "<p style='font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6B7280;margin:0 0 2px 0;'>Net Total</p>" &
+
+  "<div style='display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;'>" &
+    "<span style='font-size:34px;font-weight:700;color:#101828;line-height:0.8;letter-spacing:-0.01em;'>" & FmtCurrent & "</span>" &
+    "<span style='display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:700;padding:3px 9px;border-radius:999px;color:" & VarColor & ";background:" & BadgeBg & ";white-space:nowrap;'>" &
+      "<span style='font-size:11px;'>" & ArrowChar & "</span>" & FmtPctVar &
+    "</span>" &
+  "</div>" &
