@@ -1,0 +1,17 @@
+MCP Server URL:
+
+https://EUUOXWU-HR56554.snowflakecomputing.com/api/v2/databases/PORTFOLIO_DB/schemas/PUBLIC/mcp-servers/PORTFOLIO_ROYCE_TABORA_MCP_SERVER
+Authentication:
+OAuth
+
+OAuth Client ID:
+7dy+XZysYJU9igt3UCTQ8xr+Nos=
+
+OAuth Client Secret:
+Bz6iTMGlUwcxL1tIp0k/hcuugyE3UnuxjDQC3d4SAn0=
+
+Snowflake Username:
+EXTERNAL_ROYCE_DEMO_01
+
+Temporary Password:
+<INDIVIDUAL_TEMPORARY_PASSWORD>
