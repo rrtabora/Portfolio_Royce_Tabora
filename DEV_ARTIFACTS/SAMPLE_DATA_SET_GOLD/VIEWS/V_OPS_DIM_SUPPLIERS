@@ -1,0 +1,11 @@
+"SUPPLIER_ID","SUPPLIER_NAME","SUPPLIER_CATEGORY","STATE","STANDARD_LEAD_TIME_DAYS","SUPPLIER_RATING","ACTIVE_FLAG"
+"S001","Southern Fresh Produce","Produce","NSW",3,4.6,true
+"S002","National Protein Foods","Meat & Seafood","VIC",4,4.4,true
+"S003","Metro Beverage Supply","Beverages","NSW",2,4.3,true
+"S004","Golden Grain Bakery","Bakery","QLD",2,4.5,true
+"S005","Dairy Direct Australia","Dairy","VIC",3,4.2,true
+"S006","Pantry Essentials Co","Dry Goods","SA",5,4.1,true
+"S007","Coastal Seafood Traders","Seafood","WA",4,4.4,true
+"S008","Eco Packaging Group","Packaging","NSW",5,4.0,true
+"S009","Premium Coffee Roasters","Coffee","VIC",3,4.7,true
+"S010","Fresh Herbs Collective","Produce","TAS",4,4.5,true

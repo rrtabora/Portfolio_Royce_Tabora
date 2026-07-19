@@ -1,0 +1,108 @@
+"STORE_ID","STORE_NAME","STATE","OWNERSHIP_TYPE","LATITUDE","LONGITUDE"
+-1,"Chapel","VIC","Franchise",-37.867,144.978
+1,"Lygon","VIC","Franchise",-37.933,145.183
+2,"Hay Perth","WA","Company",-31.990,115.860
+3,"OConnell North Adelaide","SA","Franchise",-34.908,138.598
+4,"Brunswick","VIC","Franchise",-38.072,145.483
+5,"Smith","VIC","Company",-37.840,144.989
+6,"Swan","VIC","Franchise",-37.801,144.978
+7,"Bridge","VIC","Franchise",-37.773,144.996
+8,"Acland","VIC","Franchise",-37.917,145.117
+9,"Queen Mall","QLD","Franchise",-27.404,153.033
+10,"Fitzroy","VIC","Franchise",-38.383,142.483
+11,"High Northcote","VIC","Franchise",-37.983,145.217
+12,"Glenferrie","VIC","Franchise",-37.800,144.900
+13,"Toorak","VIC","Franchise",-38.220,145.040
+14,"Lonsdale Braddon","ACT","Franchise",-35.273,149.133
+15,"Greville","VIC","Franchise",-37.817,145.117
+16,"George","NSW","Company",-28.643,153.612
+17,"Carlisle","VIC","Company",-38.383,142.483
+18,"Pitt","NSW","Company",-33.417,149.583
+19,"Oxford","NSW","Franchise",-33.797,151.286
+20,"Barkly","VIC","Franchise",-37.767,144.962
+21,"James Fortitude Valley","QLD","Company",-27.502,152.971
+22,"Sydney Brunswick","VIC","Franchise",-37.773,144.996
+23,"King Newtown","NSW","Company",-34.053,151.152
+24,"Johnston","VIC","Franchise",-37.933,145.183
+25,"Gertrude","VIC","Franchise",-37.822,145.035
+26,"Nicholson","VIC","Franchise",-37.783,144.833
+27,"Victoria Richmond","VIC","Franchise",-38.220,145.040
+28,"Clarendon","VIC","Franchise",-37.857,145.035
+29,"Bay Port Melbourne","VIC","Franchise",-38.144,145.127
+30,"Puckle","VIC","Company",-37.800,144.967
+31,"Grey South Bank","QLD","Franchise",-27.230,153.100
+32,"Crown Surry Hills","NSW","Franchise",-31.083,150.917
+33,"Errol","VIC","Franchise",-37.823,144.998
+34,"Boundary West End","QLD","Company",-27.967,153.417
+35,"Napier","VIC","Company",-38.144,145.127
+36,"Union Ascot Vale","VIC","Franchise",-37.983,145.217
+37,"Keilor","VIC","Franchise",-38.220,145.040
+38,"Highpoint Way","VIC","Franchise",-37.822,145.035
+39,"Darlinghurst","NSW","Franchise",-33.283,149.100
+40,"Station Fairfield","VIC","Franchise",-37.800,144.900
+41,"Plenty Preston","VIC","Franchise",-33.877,151.104
+42,"Military Mosman","NSW","Franchise",-33.704,151.100
+43,"Campbell Parade Bondi","NSW","Franchise",-33.917,151.083
+44,"High Thornbury","VIC","Franchise",-38.030,145.347
+45,"Kedron Brook","QLD","Company",-27.400,153.067
+46,"Maroondah Highway","VIC","Company",-37.800,144.900
+47,"Nundah Village","QLD","Franchise",-24.850,152.350
+48,"Burke Camberwell","VIC","Franchise",-37.900,144.667
+49,"Redcliffe Parade","QLD","Franchise",-27.478,153.018
+50,"Whitehorse","VIC","Franchise",-38.195,146.538
+51,"Koornang","VIC","Franchise",-37.800,144.900
+52,"Kingsway Glen Waverley","VIC","Franchise",-37.867,144.978
+53,"Springvale","VIC","Franchise",-37.800,144.900
+54,"Princes Highway Dandenong","VIC","Franchise",-37.800,144.967
+55,"Lonsdale Dandenong","VIC","Franchise",-38.147,144.361
+56,"Southport Scarborough","QLD","Franchise",-28.000,153.433
+57,"Surfers Cavill","QLD","Company",-27.575,153.058
+58,"Main Mornington","VIC","Franchise",-37.822,145.035
+59,"Nepean Highway Frankston","VIC","Franchise",-37.900,144.667
+60,"Wells Frankston","VIC","Franchise",-38.030,145.347
+61,"Thompson Cranbourne","VIC","Franchise",-37.867,144.978
+62,"Sunnybank Mains","QLD","Company",-21.141,149.186
+63,"The Corso Manly","NSW","Company",-34.053,151.152
+64,"High Berwick","VIC","Franchise",-37.562,143.850
+65,"Cronulla","NSW","Franchise",-33.967,151.100
+66,"Main Pakenham","VIC","Franchise",-37.840,144.989
+67,"Hurstville Forest","NSW","Franchise",-33.829,151.241
+68,"Wyndham Werribee","VIC","Franchise",-33.877,151.104
+69,"Hornsby Pacific Highway","NSW","Franchise",-33.892,151.274
+70,"Manuka Franklin","ACT","Franchise",-35.321,149.133
+71,"Lakemba Haldon","NSW","Franchise",-36.074,146.914
+72,"Watton","VIC","Franchise",-37.783,144.833
+73,"Ballarat","VIC","Franchise",-34.183,142.150
+74,"Hampshire Sunshine","VIC","Franchise",-37.867,144.978
+75,"Barkly Footscray","VIC","Franchise",-37.650,145.017
+76,"Hopkins","VIC","Franchise",-37.867,144.978
+77,"Leeds","VIC","Franchise",-37.767,144.962
+78,"Indooroopillyation","QLD","Company",-27.458,153.035
+79,"Macaulay","VIC","Franchise",-36.383,145.400
+80,"Racecourse Flemington","VIC","Franchise",-37.933,145.183
+81,"Murray Perth","WA","Franchise",-31.901,115.908
+82,"Bell Coburg","VIC","Franchise",-37.983,145.217
+83,"Sydney Coburg","VIC","Franchise",-37.650,145.017
+84,"High Reservoir","VIC","Franchise",-37.933,145.183
+85,"Epping Plaza Drive","VIC","Franchise",-37.822,145.035
+86,"Cooper Epping","VIC","Franchise",-37.783,144.833
+87,"Murray Preston","VIC","Franchise",-37.744,145.000
+88,"Maling Canterbury","VIC","Franchise",-37.933,145.183
+89,"Burwood Highway","VIC","Franchise",-38.195,146.538
+90,"Riversdale Hawthorn","VIC","Franchise",-37.857,145.035
+91,"Bathurst William","NSW","Franchise",-34.053,151.152
+92,"Auburn","VIC","Franchise",-38.220,145.040
+93,"Church Richmond","VIC","Franchise",-37.823,144.998
+94,"Swanston Carlton","VIC","Franchise",-37.717,145.000
+95,"Elgin Carlton","VIC","Franchise",-34.183,142.150
+96,"Rathdowne","VIC","Franchise",-37.800,144.967
+97,"Queensberry","VIC","Franchise",-37.840,144.989
+98,"Mildura Langtree","VIC","Franchise",-38.195,146.538
+99,"Mildura Deakin","VIC","Franchise",-37.822,145.035
+100,"Bundaberg Bourbong","QLD","Franchise",-23.843,151.259
+101,"Geelong Ryrie","VIC","Franchise",-37.917,145.117
+102,"Geelong Pakington","VIC","Franchise",-38.144,145.127
+103,"Albany Highway Cannington","WA","Franchise",-32.017,115.933
+104,"Ballaraturt","VIC","Franchise",-37.800,144.900
+105,"Shepparton Wyndham","VIC","Franchise",-37.745,144.965
+1001,"Walter Morley","WA","Franchise",-20.735,116.845

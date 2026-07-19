@@ -1,0 +1,265 @@
+"EMPLOYEE_ID","RESTAURANT_ID","FIRST_NAME","LAST_NAME","JOB_ROLE","EMPLOYMENT_TYPE","HIRE_DATE","HOURLY_RATE","ACTIVE_FLAG"
+"E000001","R001","Ruby","Lee","Restaurant Manager","Full-time","2023-02-04",39.30,true
+"E000002","R001","Liam","White","Assistant Manager","Part-time","2020-06-02",31.52,true
+"E000003","R001","Mason","Young","Assistant Manager","Casual","2022-10-25",32.79,true
+"E000004","R001","William","Jones","Chef","Full-time","2023-01-29",30.22,true
+"E000005","R001","William","Lee","Chef","Casual","2023-09-16",35.83,true
+"E000006","R001","Ethan","Jones","Chef","Full-time","2023-08-17",30.28,true
+"E000007","R001","Leo","Brown","Chef","Part-time","2022-09-27",42.19,true
+"E000008","R001","William","Clark","Chef","Casual","2022-03-16",42.09,true
+"E000009","R001","Henry","Taylor","Chef","Casual","2023-04-02",34.50,true
+"E000010","R001","Lucas","Martin","Kitchen Hand","Part-time","2023-07-22",28.53,true
+"E000011","R001","Lucas","Martin","Kitchen Hand","Part-time","2021-06-21",29.53,true
+"E000012","R001","Ethan","Johnson","Kitchen Hand","Part-time","2022-08-29",24.79,true
+"E000013","R001","Mia","Martin","Kitchen Hand","Casual","2022-01-10",26.07,true
+"E000014","R001","Mia","Martin","Kitchen Hand","Casual","2023-05-04",28.98,true
+"E000015","R001","Leo","Johnson","Wait Staff","Casual","2020-05-09",31.29,true
+"E000016","R001","James","Johnson","Wait Staff","Full-time","2022-09-27",25.47,true
+"E000017","R001","Isla","Johnson","Wait Staff","Part-time","2022-01-01",30.10,true
+"E000018","R001","Amelia","Jones","Wait Staff","Casual","2023-07-17",27.66,true
+"E000019","R001","Chloe","Taylor","Wait Staff","Part-time","2020-12-06",29.50,true
+"E000020","R001","James","Lee","Wait Staff","Full-time","2020-07-11",25.21,true
+"E000021","R001","James","Smith","Wait Staff","Part-time","2021-04-16",25.86,true
+"E000022","R001","Ava","Johnson","Wait Staff","Full-time","2023-06-29",26.76,true
+"E000023","R001","Ava","Young","Wait Staff","Casual","2023-01-20",26.91,true
+"E000024","R001","Grace","White","Wait Staff","Casual","2020-07-24",24.96,true
+"E000025","R001","Mason","Brown","Wait Staff","Casual","2020-02-09",31.36,true
+"E000026","R001","Mia","Martin","Wait Staff","Full-time","2022-07-19",28.20,true
+"E000027","R001","William","Martin","Barista","Full-time","2022-05-25",30.08,true
+"E000028","R001","Sophie","Lee","Barista","Full-time","2021-05-25",25.24,true
+"E000029","R001","Lucas","Clark","Barista","Part-time","2022-07-30",28.19,true
+"E000030","R001","Ruby","Jones","Barista","Part-time","2019-12-19",26.14,true
+"E000031","R001","Leo","Johnson","Delivery Coordinator","Casual","2022-11-12",34.64,true
+"E000032","R001","Ruby","Lewis","Delivery Coordinator","Full-time","2021-12-21",27.26,true
+"E000033","R001","Zoe","Lee","Delivery Coordinator","Part-time","2021-08-09",33.85,true
+"E000034","R002","Leo","Nguyen","Restaurant Manager","Full-time","2022-12-29",38.63,true
+"E000035","R002","Ethan","Smith","Assistant Manager","Part-time","2023-06-07",32.96,true
+"E000036","R002","Chloe","Walker","Assistant Manager","Full-time","2021-08-14",39.18,true
+"E000037","R002","William","Nguyen","Chef","Casual","2021-12-29",41.58,true
+"E000038","R002","Grace","Walker","Chef","Part-time","2023-09-02",36.90,true
+"E000039","R002","Lucas","Thomas","Chef","Part-time","2020-04-18",31.82,true
+"E000040","R002","Olivia","Young","Chef","Full-time","2021-06-07",36.91,true
+"E000041","R002","Leo","Martin","Chef","Part-time","2023-05-20",40.19,true
+"E000042","R002","Noah","Lewis","Chef","Full-time","2020-03-31",40.86,true
+"E000043","R002","Ethan","Nguyen","Kitchen Hand","Full-time","2023-08-02",25.37,true
+"E000044","R002","Ruby","Smith","Kitchen Hand","Casual","2020-12-12",24.34,true
+"E000045","R002","James","Walker","Kitchen Hand","Part-time","2021-02-19",29.49,true
+"E000046","R002","Amelia","Martin","Kitchen Hand","Casual","2021-09-22",24.09,true
+"E000047","R002","Leo","Taylor","Kitchen Hand","Part-time","2020-10-04",24.46,true
+"E000048","R002","Zoe","Clark","Wait Staff","Part-time","2022-01-16",24.07,true
+"E000049","R002","Isla","Martin","Wait Staff","Part-time","2023-08-02",24.21,true
+"E000050","R002","Jack","Jones","Wait Staff","Full-time","2020-11-12",24.08,true
+"E000051","R002","Zoe","Brown","Wait Staff","Full-time","2022-12-05",27.30,true
+"E000052","R002","Henry","Thomas","Wait Staff","Full-time","2020-04-30",29.90,true
+"E000053","R002","Ava","Martin","Wait Staff","Full-time","2020-03-02",24.19,true
+"E000054","R002","Amelia","Walker","Wait Staff","Part-time","2021-07-01",29.20,true
+"E000055","R002","Sophie","Lewis","Wait Staff","Full-time","2023-04-24",25.09,true
+"E000056","R002","Mason","Johnson","Wait Staff","Part-time","2021-11-03",25.03,true
+"E000057","R002","Ethan","Lewis","Wait Staff","Full-time","2020-05-19",30.31,true
+"E000058","R002","Ethan","Smith","Wait Staff","Full-time","2022-02-28",26.20,true
+"E000059","R002","Isla","Harris","Wait Staff","Full-time","2023-04-22",31.35,true
+"E000060","R002","Noah","Nguyen","Barista","Casual","2022-11-17",27.22,true
+"E000061","R002","Ruby","Martin","Barista","Full-time","2022-06-03",25.61,true
+"E000062","R002","Leo","Lewis","Barista","Casual","2022-01-14",28.17,true
+"E000063","R002","Chloe","Brown","Barista","Part-time","2020-10-30",26.76,true
+"E000064","R002","Liam","Walker","Delivery Coordinator","Full-time","2021-04-17",35.11,true
+"E000065","R002","Ava","Walker","Delivery Coordinator","Casual","2020-12-22",30.36,true
+"E000066","R002","Amelia","Thomas","Delivery Coordinator","Full-time","2021-09-07",29.68,true
+"E000067","R003","Isla","Nguyen","Restaurant Manager","Full-time","2021-06-20",45.95,true
+"E000068","R003","James","Lewis","Assistant Manager","Part-time","2020-11-11",35.55,true
+"E000069","R003","Noah","White","Assistant Manager","Full-time","2022-02-28",41.85,true
+"E000070","R003","Mia","Thomas","Chef","Part-time","2023-09-29",37.11,true
+"E000071","R003","Noah","Clark","Chef","Full-time","2023-11-04",37.12,true
+"E000072","R003","Liam","Taylor","Chef","Full-time","2023-01-30",39.64,true
+"E000073","R003","Isla","Johnson","Chef","Part-time","2021-04-14",32.75,true
+"E000074","R003","Noah","Thomas","Chef","Casual","2020-08-27",41.36,true
+"E000075","R003","Leo","Johnson","Chef","Full-time","2020-02-16",31.04,true
+"E000076","R003","William","Jones","Kitchen Hand","Part-time","2020-08-09",24.15,true
+"E000077","R003","Ruby","Young","Kitchen Hand","Full-time","2020-05-16",26.47,true
+"E000078","R003","Jack","White","Kitchen Hand","Part-time","2020-09-02",28.76,true
+"E000079","R003","Mason","Johnson","Kitchen Hand","Part-time","2021-10-15",30.88,true
+"E000080","R003","Sophie","Jones","Kitchen Hand","Part-time","2020-09-03",24.15,true
+"E000081","R003","Ava","Nguyen","Wait Staff","Part-time","2020-02-21",30.42,true
+"E000082","R003","Liam","Wilson","Wait Staff","Casual","2020-10-22",27.03,true
+"E000083","R003","Lucas","Jones","Wait Staff","Casual","2020-05-12",26.29,true
+"E000084","R003","Liam","Young","Wait Staff","Part-time","2021-03-24",31.05,true
+"E000085","R003","James","Taylor","Wait Staff","Part-time","2023-01-29",27.12,true
+"E000086","R003","Ruby","Young","Wait Staff","Part-time","2022-05-21",24.88,true
+"E000087","R003","Sophie","Clark","Wait Staff","Casual","2021-02-15",29.04,true
+"E000088","R003","Lucas","Smith","Wait Staff","Casual","2023-06-04",25.83,true
+"E000089","R003","Zoe","Wilson","Wait Staff","Full-time","2023-05-23",31.24,true
+"E000090","R003","Lucas","Johnson","Wait Staff","Part-time","2020-07-31",28.21,true
+"E000091","R003","Zoe","Smith","Wait Staff","Full-time","2020-06-12",26.68,true
+"E000092","R003","Liam","Wilson","Wait Staff","Casual","2020-10-02",26.87,true
+"E000093","R003","Sophie","Smith","Barista","Full-time","2021-09-08",29.22,true
+"E000094","R003","Zoe","Jones","Barista","Full-time","2023-08-31",32.90,true
+"E000095","R003","Zoe","Walker","Barista","Casual","2023-03-23",27.13,true
+"E000096","R003","Ruby","Wilson","Barista","Casual","2023-11-22",25.14,true
+"E000097","R003","Lucas","Harris","Delivery Coordinator","Casual","2022-01-24",27.73,true
+"E000098","R003","James","Johnson","Delivery Coordinator","Full-time","2022-06-11",28.64,true
+"E000099","R003","Chloe","Wilson","Delivery Coordinator","Casual","2022-01-27",29.69,true
+"E000100","R004","Ava","Johnson","Restaurant Manager","Part-time","2019-12-05",43.48,true
+"E000101","R004","Mia","Lewis","Assistant Manager","Casual","2022-07-22",31.17,true
+"E000102","R004","Isla","Jones","Assistant Manager","Casual","2023-08-05",32.14,true
+"E000103","R004","James","Nguyen","Chef","Casual","2021-04-26",41.47,true
+"E000104","R004","Leo","Jones","Chef","Part-time","2020-12-05",32.48,true
+"E000105","R004","Ethan","Nguyen","Chef","Part-time","2023-04-21",40.50,true
+"E000106","R004","Leo","Johnson","Chef","Casual","2021-06-11",32.19,true
+"E000107","R004","Isla","Martin","Chef","Casual","2021-04-07",32.80,true
+"E000108","R004","Grace","Brown","Chef","Part-time","2021-06-07",34.62,true
+"E000109","R004","Isla","Johnson","Kitchen Hand","Part-time","2022-12-26",25.00,true
+"E000110","R004","Mia","Clark","Kitchen Hand","Part-time","2020-04-26",27.45,true
+"E000111","R004","Liam","Johnson","Kitchen Hand","Part-time","2020-04-01",27.04,true
+"E000112","R004","Leo","Taylor","Kitchen Hand","Casual","2020-11-05",30.79,true
+"E000113","R004","Isla","Lee","Kitchen Hand","Part-time","2021-10-06",27.08,true
+"E000114","R004","Amelia","Brown","Wait Staff","Part-time","2023-11-10",26.34,true
+"E000115","R004","Sophie","White","Wait Staff","Part-time","2020-02-11",24.11,true
+"E000116","R004","Sophie","Johnson","Wait Staff","Part-time","2020-10-16",30.71,true
+"E000117","R004","Chloe","Lewis","Wait Staff","Part-time","2023-10-20",28.25,true
+"E000118","R004","Liam","Harris","Wait Staff","Full-time","2023-05-03",29.84,true
+"E000119","R004","William","Martin","Wait Staff","Full-time","2023-08-03",26.50,true
+"E000120","R004","Ruby","Nguyen","Wait Staff","Part-time","2023-10-25",24.74,true
+"E000121","R004","Zoe","Smith","Wait Staff","Casual","2022-01-17",26.39,true
+"E000122","R004","Henry","Lewis","Wait Staff","Part-time","2020-07-17",26.81,true
+"E000123","R004","Chloe","Walker","Wait Staff","Full-time","2022-06-04",24.37,true
+"E000124","R004","Isla","Walker","Wait Staff","Part-time","2020-01-09",27.92,true
+"E000125","R004","Liam","Wilson","Wait Staff","Full-time","2020-11-25",26.93,true
+"E000126","R004","Liam","Young","Barista","Full-time","2022-04-21",25.96,true
+"E000127","R004","Jack","Wilson","Barista","Full-time","2021-04-22",25.08,true
+"E000128","R004","William","Lewis","Barista","Part-time","2023-06-17",29.29,true
+"E000129","R004","Olivia","Smith","Barista","Full-time","2023-05-26",30.26,true
+"E000130","R004","James","Smith","Delivery Coordinator","Casual","2020-02-25",32.72,true
+"E000131","R004","Ava","Thomas","Delivery Coordinator","Part-time","2020-11-28",27.76,true
+"E000132","R004","Zoe","Wilson","Delivery Coordinator","Casual","2021-05-15",27.35,true
+"E000133","R005","Mason","Lewis","Restaurant Manager","Part-time","2020-03-07",44.87,true
+"E000134","R005","Henry","Harris","Assistant Manager","Full-time","2020-04-17",32.01,true
+"E000135","R005","William","Nguyen","Assistant Manager","Full-time","2023-09-30",40.57,true
+"E000136","R005","Lucas","Brown","Chef","Full-time","2020-01-25",32.44,true
+"E000137","R005","Olivia","Young","Chef","Full-time","2022-09-12",34.26,true
+"E000138","R005","Jack","Brown","Chef","Full-time","2022-10-24",30.40,true
+"E000139","R005","William","Johnson","Chef","Part-time","2022-08-27",31.30,true
+"E000140","R005","Grace","Thomas","Chef","Casual","2022-03-25",42.94,true
+"E000141","R005","Henry","Lee","Chef","Part-time","2020-04-26",42.51,true
+"E000142","R005","Amelia","Taylor","Kitchen Hand","Casual","2022-04-03",24.10,true
+"E000143","R005","Chloe","Taylor","Kitchen Hand","Casual","2022-12-14",25.41,true
+"E000144","R005","Chloe","Lee","Kitchen Hand","Full-time","2020-05-11",24.25,true
+"E000145","R005","Noah","Martin","Kitchen Hand","Part-time","2023-09-22",30.23,true
+"E000146","R005","Noah","Clark","Kitchen Hand","Full-time","2023-04-25",24.21,true
+"E000147","R005","William","Harris","Wait Staff","Full-time","2021-01-20",29.21,true
+"E000148","R005","Lucas","Brown","Wait Staff","Full-time","2023-11-22",27.11,true
+"E000149","R005","Isla","Nguyen","Wait Staff","Full-time","2022-01-28",27.75,true
+"E000150","R005","Olivia","Brown","Wait Staff","Casual","2022-07-29",29.88,true
+"E000151","R005","Ava","Harris","Wait Staff","Casual","2022-01-31",30.38,true
+"E000152","R005","Sophie","Lewis","Wait Staff","Casual","2022-04-30",30.79,true
+"E000153","R005","Amelia","Thomas","Wait Staff","Full-time","2021-07-10",29.32,true
+"E000154","R005","Amelia","Young","Wait Staff","Part-time","2022-08-17",25.34,true
+"E000155","R005","Ava","Harris","Wait Staff","Full-time","2021-12-02",30.87,true
+"E000156","R005","Jack","White","Wait Staff","Full-time","2020-03-26",29.06,true
+"E000157","R005","Ethan","Johnson","Wait Staff","Full-time","2020-10-22",25.64,true
+"E000158","R005","Mason","Wilson","Wait Staff","Casual","2022-09-08",27.31,true
+"E000159","R005","Ethan","Walker","Barista","Casual","2023-06-09",28.31,true
+"E000160","R005","Sophie","Nguyen","Barista","Full-time","2021-02-24",29.42,true
+"E000161","R005","James","Lee","Barista","Casual","2021-04-03",27.94,true
+"E000162","R005","Henry","Young","Barista","Full-time","2022-05-07",33.33,true
+"E000163","R005","Mason","Johnson","Delivery Coordinator","Casual","2020-07-27",35.06,true
+"E000164","R005","Noah","Walker","Delivery Coordinator","Full-time","2022-07-02",33.67,true
+"E000165","R005","Zoe","Jones","Delivery Coordinator","Part-time","2021-09-17",34.99,true
+"E000166","R006","Grace","Jones","Restaurant Manager","Part-time","2022-04-28",38.43,true
+"E000167","R006","Chloe","Brown","Assistant Manager","Part-time","2023-02-18",41.18,true
+"E000168","R006","Sophie","Lewis","Assistant Manager","Part-time","2021-10-01",38.67,true
+"E000169","R006","Mia","Wilson","Chef","Full-time","2021-05-16",38.46,true
+"E000170","R006","Isla","Johnson","Chef","Part-time","2020-02-15",40.97,true
+"E000171","R006","Ava","White","Chef","Part-time","2020-05-21",38.48,true
+"E000172","R006","Sophie","Clark","Chef","Full-time","2021-02-03",33.16,true
+"E000173","R006","Olivia","Lewis","Chef","Full-time","2021-05-17",38.62,true
+"E000174","R006","Isla","Walker","Chef","Full-time","2022-01-01",30.13,true
+"E000175","R006","William","Wilson","Kitchen Hand","Casual","2021-05-03",27.93,true
+"E000176","R006","Leo","Clark","Kitchen Hand","Casual","2020-11-23",28.24,true
+"E000177","R006","Sophie","Lee","Kitchen Hand","Part-time","2020-11-16",30.89,true
+"E000178","R006","Mason","Lee","Kitchen Hand","Casual","2022-11-28",29.38,true
+"E000179","R006","Ethan","Lewis","Kitchen Hand","Part-time","2021-01-12",27.44,true
+"E000180","R006","Leo","Johnson","Wait Staff","Casual","2020-11-12",27.69,true
+"E000181","R006","Jack","Taylor","Wait Staff","Casual","2022-04-22",30.61,true
+"E000182","R006","Liam","Johnson","Wait Staff","Part-time","2022-05-26",31.34,true
+"E000183","R006","Zoe","Lee","Wait Staff","Full-time","2019-12-08",27.42,true
+"E000184","R006","Grace","Thomas","Wait Staff","Full-time","2021-10-09",27.08,true
+"E000185","R006","Grace","Nguyen","Wait Staff","Casual","2020-12-12",28.17,true
+"E000186","R006","William","Taylor","Wait Staff","Casual","2022-05-14",25.26,true
+"E000187","R006","Leo","Smith","Wait Staff","Full-time","2023-08-04",29.26,true
+"E000188","R006","Grace","Lewis","Wait Staff","Part-time","2019-12-13",27.00,true
+"E000189","R006","William","Martin","Wait Staff","Full-time","2023-10-05",25.49,true
+"E000190","R006","Olivia","Nguyen","Wait Staff","Full-time","2021-02-24",27.87,true
+"E000191","R006","Henry","Lee","Wait Staff","Casual","2023-02-19",31.31,true
+"E000192","R006","Zoe","Brown","Barista","Casual","2022-10-17",31.53,true
+"E000193","R006","Chloe","White","Barista","Casual","2023-05-22",26.05,true
+"E000194","R006","Jack","Jones","Barista","Casual","2021-05-30",32.59,true
+"E000195","R006","Liam","Thomas","Barista","Casual","2021-03-20",29.00,true
+"E000196","R006","Jack","Nguyen","Delivery Coordinator","Full-time","2021-06-25",32.33,true
+"E000197","R006","Henry","Wilson","Delivery Coordinator","Part-time","2023-11-23",29.12,true
+"E000198","R006","James","Brown","Delivery Coordinator","Casual","2023-07-14",31.74,true
+"E000199","R007","Leo","Brown","Restaurant Manager","Part-time","2020-12-08",45.53,true
+"E000200","R007","Noah","Smith","Assistant Manager","Casual","2023-02-11",35.77,true
+"E000201","R007","Leo","Martin","Assistant Manager","Full-time","2020-02-17",38.16,true
+"E000202","R007","Noah","Clark","Chef","Part-time","2021-05-31",32.45,true
+"E000203","R007","Chloe","Lee","Chef","Casual","2021-03-24",42.70,true
+"E000204","R007","Mia","Brown","Chef","Full-time","2019-12-24",31.30,true
+"E000205","R007","James","Wilson","Chef","Full-time","2021-02-14",32.87,true
+"E000206","R007","Liam","Johnson","Chef","Full-time","2020-05-12",30.07,true
+"E000207","R007","Lucas","Walker","Chef","Part-time","2020-03-12",34.52,true
+"E000208","R007","Ethan","Brown","Kitchen Hand","Full-time","2022-03-27",29.04,true
+"E000209","R007","Noah","Harris","Kitchen Hand","Casual","2020-06-22",26.91,true
+"E000210","R007","James","Smith","Kitchen Hand","Full-time","2021-05-29",26.07,true
+"E000211","R007","Ethan","Wilson","Kitchen Hand","Casual","2023-05-17",27.49,true
+"E000212","R007","Zoe","Nguyen","Kitchen Hand","Casual","2022-04-19",28.67,true
+"E000213","R007","William","Young","Wait Staff","Full-time","2022-08-01",26.30,true
+"E000214","R007","Leo","Nguyen","Wait Staff","Part-time","2021-10-06",30.74,true
+"E000215","R007","Zoe","Taylor","Wait Staff","Casual","2023-06-23",30.97,true
+"E000216","R007","William","Johnson","Wait Staff","Part-time","2021-05-02",27.47,true
+"E000217","R007","Henry","Brown","Wait Staff","Casual","2023-04-09",24.90,true
+"E000218","R007","Lucas","Harris","Wait Staff","Part-time","2023-07-20",30.52,true
+"E000219","R007","Amelia","Thomas","Wait Staff","Part-time","2022-09-22",26.13,true
+"E000220","R007","Olivia","Wilson","Wait Staff","Full-time","2022-08-06",26.70,true
+"E000221","R007","Liam","Taylor","Wait Staff","Casual","2022-04-12",28.65,true
+"E000222","R007","Jack","Nguyen","Wait Staff","Full-time","2023-03-25",26.24,true
+"E000223","R007","Leo","Wilson","Wait Staff","Casual","2020-04-27",26.44,true
+"E000224","R007","Noah","Smith","Wait Staff","Casual","2019-12-11",31.67,true
+"E000225","R007","James","Clark","Barista","Full-time","2022-05-14",32.85,true
+"E000226","R007","Henry","Brown","Barista","Casual","2023-06-26",30.34,true
+"E000227","R007","Leo","Wilson","Barista","Casual","2021-09-18",26.03,true
+"E000228","R007","William","Lewis","Barista","Full-time","2021-11-24",31.51,true
+"E000229","R007","Olivia","Martin","Delivery Coordinator","Part-time","2022-04-03",28.90,true
+"E000230","R007","Jack","Taylor","Delivery Coordinator","Part-time","2021-10-04",29.49,true
+"E000231","R007","William","Harris","Delivery Coordinator","Part-time","2021-08-26",35.25,true
+"E000232","R008","Noah","Johnson","Restaurant Manager","Part-time","2023-05-31",39.03,true
+"E000233","R008","Chloe","Martin","Assistant Manager","Part-time","2022-09-29",37.08,true
+"E000234","R008","Liam","Nguyen","Assistant Manager","Part-time","2023-01-11",33.72,true
+"E000235","R008","Ruby","Wilson","Chef","Part-time","2022-03-05",32.38,true
+"E000236","R008","Mason","Taylor","Chef","Full-time","2022-02-01",35.23,true
+"E000237","R008","Mason","Lewis","Chef","Casual","2021-01-07",39.65,true
+"E000238","R008","William","Lee","Chef","Casual","2021-07-10",42.77,true
+"E000239","R008","Liam","Johnson","Chef","Casual","2020-06-06",38.23,true
+"E000240","R008","Mia","Young","Chef","Full-time","2020-03-02",37.14,true
+"E000241","R008","Grace","Walker","Kitchen Hand","Full-time","2021-11-30",30.65,true
+"E000242","R008","Ava","Smith","Kitchen Hand","Full-time","2022-12-26",29.75,true
+"E000243","R008","Leo","Smith","Kitchen Hand","Full-time","2022-08-07",24.22,true
+"E000244","R008","Sophie","Wilson","Kitchen Hand","Casual","2020-11-29",26.08,true
+"E000245","R008","Ruby","Lee","Kitchen Hand","Full-time","2020-11-26",29.82,true
+"E000246","R008","Ethan","Thomas","Wait Staff","Casual","2023-04-12",25.91,true
+"E000247","R008","Isla","Smith","Wait Staff","Full-time","2021-11-06",27.92,true
+"E000248","R008","Noah","Young","Wait Staff","Casual","2022-04-18",28.80,true
+"E000249","R008","William","Jones","Wait Staff","Casual","2020-09-15",24.92,true
+"E000250","R008","Leo","Thomas","Wait Staff","Full-time","2020-03-03",28.89,true
+"E000251","R008","Lucas","Jones","Wait Staff","Part-time","2022-08-01",30.03,true
+"E000252","R008","Jack","Nguyen","Wait Staff","Part-time","2023-04-14",26.69,true
+"E000253","R008","Henry","Lewis","Wait Staff","Part-time","2021-06-27",24.73,true
+"E000254","R008","Henry","Taylor","Wait Staff","Part-time","2022-02-21",24.01,true
+"E000255","R008","Sophie","Harris","Wait Staff","Casual","2019-12-23",25.57,true
+"E000256","R008","Ruby","Young","Wait Staff","Part-time","2020-08-09",30.45,true
+"E000257","R008","Grace","White","Wait Staff","Part-time","2023-09-18",25.75,true
+"E000258","R008","Sophie","Wilson","Barista","Part-time","2023-07-15",28.59,true
+"E000259","R008","Grace","Wilson","Barista","Part-time","2021-03-28",30.36,true
+"E000260","R008","Ava","Martin","Barista","Full-time","2020-06-18",30.73,true
+"E000261","R008","Jack","Taylor","Barista","Casual","2022-06-19",26.86,true
+"E000262","R008","Chloe","Jones","Delivery Coordinator","Part-time","2021-03-14",35.27,true
+"E000263","R008","Mason","Lewis","Delivery Coordinator","Part-time","2022-10-07",33.32,true
+"E000264","R008","Mia","Lee","Delivery Coordinator","Casual","2023-06-15",35.71,true

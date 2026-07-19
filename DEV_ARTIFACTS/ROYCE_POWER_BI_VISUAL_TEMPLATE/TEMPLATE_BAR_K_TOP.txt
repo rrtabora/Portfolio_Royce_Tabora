@@ -1,0 +1,53 @@
+<MEASURE_NAME> = 
+
+VAR TopStores =
+    TOPN(
+        10,
+        FILTER(
+            SUMMARIZE(
+                <TABLE>,
+                <COLUMN_NAME>,
+                "Last_Year", <CURRENT>,
+                "This_Year", <LAST_YEAR>
+            ),
+            NOT ISBLANK([This_Year]) && [This_Year] <> 0
+        ),
+        [Last_Year], DESC
+    )
+VAR MaxVal = MAXX(TopStores, [Last_Year])
+VAR HTMLTable =
+    "<div style='font-family:Segoe UI, sans-serif; background:#ffffff; border:1px solid #e2e2e2; border-radius:12px; padding:12px; box-shadow:0 1px 3px rgba(0,0,0,0.08);'>" &
+
+    "<p style='font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6B7280;margin:0 0 2px 0;'>Top Performing Restaurants</p>" &
+
+
+    "<table style='width:100%; border-collapse:collapse; font-size:13px;'>" &
+    "<tr style='background:#1f2937; color:#fff;'>" &
+        "<th style='padding:8px; text-align:left; border-radius:8px 0 0 0;'>#</th>" &
+        "<th style='padding:8px; text-align:left;'>Store</th>" &
+        "<th style='padding:8px; text-align:right;'>Net Total</th>" &
+        // "<th style='padding:8px; text-align:right;'>Last Year</th>" &
+        "<th style='padding:8px; text-align:right; border-radius:0 8px 0 0;'>YoY %</th>" &
+    "</tr>" &
+    CONCATENATEX(
+        TopStores,
+        VAR CurRank = RANKX(TopStores, [Last_Year],, DESC)
+        VAR YoY = DIVIDE([Last_Year] - [This_Year], [This_Year])
+        VAR BarWidth = DIVIDE([Last_Year], MaxVal) * 100
+        VAR TxtColor = IF(YoY >= 0, "#16a34a", "#dc2626")
+        RETURN
+        "<tr style='border-bottom:1px solid #eee;'>" &
+            "<td style='padding:6px 8px;'>" & CurRank & "</td>" &
+            "<td style='padding:6px 8px;'>" & [STORE_NAME] &
+                "<div style='background:#3b82f6; height:4px; width:" & BarWidth & "%; margin-top:4px; border-radius:2px;'></div>" &
+            "</td>" &
+            "<td style='padding:6px 8px; text-align:right;'>$" & FORMAT([This_Year], "#,##0") & "</td>" &
+            // "<td style='padding:6px 8px; text-align:right; color:#6b7280;'>$" & FORMAT([This_Year], "#,##0") & "</td>" &
+            "<td style='padding:6px 8px; text-align:right; color:" & TxtColor & "; font-weight:600;'>" & FORMAT(YoY, "0.0%") & "</td>" &
+        "</tr>",
+        "",
+        [Last_Year], DESC
+    ) &
+    "</table></div>"
+RETURN
+    HTMLTable
