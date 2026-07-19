@@ -1,0 +1,819 @@
+name: SV_PRODUCTS_SUMMARY
+description: >
+  Semantic view for product sales and item-level modifier analysis. Parent menu items
+  are identified through V_DIM_PRODUCT_CODE and measured from AWS_FACT_PRODUCT_INSTANCE.
+  Child PLU codes represent modifiers or item details and are only analysed through
+  AWS_FACT_PRODUCT_MODIFIER after linking them to the sold parent item by INSTANCE_ID
+  and PLU_CODE_PARENT.
+
+tables:
+  - name: AWS_FACT_PRODUCT_INSTANCE
+    description: >
+      One row per sold parent product instance. This is the authoritative fact table
+      for parent-item sales, quantity, tax, and revenue. Start here whenever a user
+      asks about an item, product sales, units sold, transactions, customers, stores,
+      channels, or dates. Do not calculate parent-item sales from the modifier fact.
+    synonyms:
+      - product instances
+      - sold items
+      - parent item sales
+      - menu item sales
+      - item transactions
+    base_table:
+      database: PORTFOLIO_DB
+      schema: MARTS
+      table: AWS_FACT_PRODUCT_INSTANCE
+    dimensions:
+      - name: INSTANCE_ID
+        description: >
+          Unique identifier for one sold parent-item instance within a transaction.
+          Use this key to connect the sold parent item to its child modifiers.
+        synonyms:
+          - item instance id
+          - sold item id
+          - product instance id
+        expr: INSTANCE_ID
+        data_type: NUMBER(38,0)
+        unique: true
+      - name: MEMBER_ID
+        description: Customer or loyalty-member identifier associated with the sale.
+        synonyms:
+          - customer id
+          - loyalty member id
+        expr: MEMBER_ID
+        data_type: NUMBER(38,0)
+      - name: PARENT_ITEM_ID
+        description: Source-system identifier for the sold parent line item.
+        synonyms:
+          - parent line item id
+          - item id
+        expr: PARENT_ITEM_ID
+        data_type: NUMBER(38,0)
+      - name: PLU_CODE_PARENT
+        description: >
+          Parent PLU code identifying the menu item that was sold. Join this to
+          V_DIM_PRODUCT_CODE.PLU_CODE to resolve the parent product name and category.
+        synonyms:
+          - parent plu
+          - item plu
+          - product code
+          - menu item code
+        expr: PLU_CODE_PARENT
+        data_type: NUMBER(38,0)
+      - name: SALES_CHANNEL
+        description: Sales-channel identifier, such as delivery, app, kiosk, or counter.
+        synonyms:
+          - channel id
+          - order channel
+        expr: SALES_CHANNEL
+        data_type: NUMBER(38,0)
+      - name: SALES_TYPE
+        description: Sales-type identifier describing the transaction or fulfilment type.
+        synonyms:
+          - order type id
+          - transaction type
+        expr: SALES_TYPE
+        data_type: NUMBER(38,0)
+      - name: STORE_ID
+        description: Restaurant or store identifier where the sale was recorded.
+        synonyms:
+          - restaurant id
+          - location id
+        expr: STORE_ID
+        data_type: NUMBER(38,0)
+      - name: TRANSACTION_ID
+        description: Identifier of the customer transaction containing the sold item.
+        synonyms:
+          - order id
+          - receipt id
+          - sale id
+        expr: TRANSACTION_ID
+        data_type: NUMBER(38,0)
+    time_dimensions:
+      - name: TRANSACTION_DATE
+        description: Business date on which the parent item was sold.
+        synonyms:
+          - sale date
+          - order date
+          - transaction day
+        expr: TRANSACTION_DATE
+        data_type: DATE
+      - name: TRANSACTION_TIME_BINNED_30
+        description: Transaction time grouped into a 30-minute reporting interval.
+        synonyms:
+          - half hour
+          - 30 minute interval
+          - time bucket
+        expr: TRANSACTION_TIME_BINNED_30
+        data_type: TIME(9)
+    facts:
+      - name: AMOUNT_GROSS
+        description: Gross value of the sold parent item, including GST where applicable.
+        synonyms:
+          - gross sales amount
+          - gross revenue
+        expr: AMOUNT_GROSS
+        data_type: NUMBER(38,7)
+        access_modifier: public_access
+      - name: AMOUNT_GST
+        description: GST or tax amount attributed to the sold parent item.
+        synonyms:
+          - tax amount
+          - gst
+        expr: AMOUNT_GST
+        data_type: NUMBER(29,7)
+        access_modifier: public_access
+      - name: AMOUNT_NET
+        description: Net sales value of the sold parent item excluding GST.
+        synonyms:
+          - net sales amount
+          - net revenue
+          - item revenue
+        expr: AMOUNT_NET
+        data_type: NUMBER(38,7)
+        access_modifier: public_access
+      - name: QUANTITY
+        description: Quantity represented by the sold parent-item instance.
+        synonyms:
+          - units
+          - item quantity
+          - units sold
+        expr: QUANTITY
+        data_type: NUMBER(27,5)
+        access_modifier: public_access
+    metrics:
+      - name: TOTAL_PARENT_ITEM_SALES_NET
+        description: Total net sales generated by parent items, excluding GST.
+        synonyms:
+          - total net sales
+          - net product revenue
+          - item sales
+        expr: SUM(AMOUNT_NET)
+        access_modifier: public_access
+      - name: TOTAL_PARENT_ITEM_SALES_GROSS
+        description: Total gross sales generated by parent items, including GST.
+        synonyms:
+          - total gross sales
+          - gross product revenue
+        expr: SUM(AMOUNT_GROSS)
+        access_modifier: public_access
+      - name: TOTAL_PARENT_ITEM_GST
+        description: Total GST attributed to parent-item sales.
+        synonyms:
+          - total tax
+          - total gst
+        expr: SUM(AMOUNT_GST)
+        access_modifier: public_access
+      - name: TOTAL_PARENT_ITEM_QUANTITY
+        description: Total quantity of parent menu items sold.
+        synonyms:
+          - total units sold
+          - product quantity
+          - item count
+        expr: SUM(QUANTITY)
+        access_modifier: public_access
+      - name: SOLD_ITEM_INSTANCE_COUNT
+        description: Count of distinct sold parent-item instances.
+        synonyms:
+          - sold item count
+          - product instance count
+        expr: COUNT(DISTINCT INSTANCE_ID)
+        access_modifier: public_access
+      - name: TRANSACTION_COUNT
+        description: Count of distinct transactions containing parent-item sales.
+        synonyms:
+          - order count
+          - receipt count
+        expr: COUNT(DISTINCT TRANSACTION_ID)
+        access_modifier: public_access
+      - name: AVERAGE_NET_SALES_PER_ITEM_INSTANCE
+        description: Average net sales value per distinct sold parent-item instance.
+        synonyms:
+          - average item value
+          - average product revenue
+        expr: SUM(AMOUNT_NET) / NULLIF(COUNT(DISTINCT INSTANCE_ID), 0)
+        access_modifier: public_access
+
+  - name: AWS_FACT_PRODUCT_MODIFIER
+    description: >
+      One row per child PLU or modifier attached to a sold parent-item instance.
+      Use this table only when the user asks for item details, additions, removals,
+      substitutions, modifier quantities, or modifier prices. Always retain the
+      connection to the sold parent through INSTANCE_ID and PLU_CODE_PARENT.
+    synonyms:
+      - product modifiers
+      - item customisations
+      - child items
+      - additions and removals
+      - item details
+    base_table:
+      database: PORTFOLIO_DB
+      schema: MARTS
+      table: AWS_FACT_PRODUCT_MODIFIER
+    dimensions:
+      - name: INSTANCE_ID
+        description: >
+          Identifier of the sold parent-item instance to which this child modifier belongs.
+          Join to AWS_FACT_PRODUCT_INSTANCE.INSTANCE_ID when parent context is required.
+        synonyms:
+          - parent instance id
+          - sold item id
+        expr: INSTANCE_ID
+        data_type: NUMBER(38,0)
+      - name: MEMBER_ID
+        description: Customer or loyalty-member identifier associated with the modifier row.
+        synonyms:
+          - customer id
+          - loyalty member id
+        expr: MEMBER_ID
+        data_type: NUMBER(38,0)
+      - name: MODIFIER_ITEM_ID
+        description: Source-system identifier for the modifier line attached to the item.
+        synonyms:
+          - modifier line id
+          - child item id
+        expr: MODIFIER_ITEM_ID
+        data_type: NUMBER(38,0)
+      - name: PLU_CODE_CHILD
+        description: >
+          Child PLU code identifying the modifier, ingredient change, addition, removal,
+          or other item-level detail. Join to V_DIM_PRODUCT_CODE_CHILD.PLU_CODE.
+        synonyms:
+          - child plu
+          - modifier plu
+          - ingredient code
+          - detail code
+        expr: PLU_CODE_CHILD
+        data_type: NUMBER(38,0)
+      - name: PLU_CODE_PARENT
+        description: >
+          Parent PLU code of the sold menu item receiving this modifier. Use together
+          with INSTANCE_ID to maintain the correct parent-child context.
+        synonyms:
+          - parent plu
+          - base item plu
+          - menu item code
+        expr: PLU_CODE_PARENT
+        data_type: NUMBER(38,0)
+      - name: SALES_CHANNEL
+        description: Sales-channel identifier inherited from the transaction.
+        synonyms:
+          - channel id
+          - order channel
+        expr: SALES_CHANNEL
+        data_type: NUMBER(38,0)
+      - name: SALES_TYPE
+        description: Sales-type identifier inherited from the transaction.
+        synonyms:
+          - order type id
+          - transaction type
+        expr: SALES_TYPE
+        data_type: NUMBER(38,0)
+      - name: STORE_ID
+        description: Restaurant or store identifier where the modified item was sold.
+        synonyms:
+          - restaurant id
+          - location id
+        expr: STORE_ID
+        data_type: NUMBER(38,0)
+      - name: TRANSACTION_ID
+        description: Identifier of the transaction containing the modified item.
+        synonyms:
+          - order id
+          - receipt id
+        expr: TRANSACTION_ID
+        data_type: NUMBER(38,0)
+    time_dimensions:
+      - name: TRANSACTION_DATE
+        description: Business date on which the modified parent item was sold.
+        synonyms:
+          - sale date
+          - order date
+        expr: TRANSACTION_DATE
+        data_type: DATE
+      - name: TRANSACTION_TIME_BINNED_30
+        description: Transaction time grouped into a 30-minute reporting interval.
+        synonyms:
+          - half hour
+          - 30 minute interval
+        expr: TRANSACTION_TIME_BINNED_30
+        data_type: TIME(9)
+    facts:
+      - name: AMOUNT_GROSS
+        description: Gross monetary amount recorded for the modifier row.
+        synonyms:
+          - modifier gross amount
+          - gross modifier revenue
+        expr: AMOUNT_GROSS
+        data_type: NUMBER(26,7)
+        access_modifier: public_access
+      - name: AMOUNT_GST
+        description: GST or tax amount recorded for the modifier row.
+        synonyms:
+          - modifier tax
+          - modifier gst
+        expr: AMOUNT_GST
+        data_type: NUMBER(17,7)
+        access_modifier: public_access
+      - name: AMOUNT_NET
+        description: Net monetary amount recorded for the modifier row, excluding GST.
+        synonyms:
+          - modifier net amount
+          - modifier revenue
+        expr: AMOUNT_NET
+        data_type: NUMBER(27,7)
+        access_modifier: public_access
+      - name: MODIFIER_PRICE
+        description: Unit price or price adjustment recorded for the child modifier.
+        synonyms:
+          - customisation price
+          - add-on price
+          - modifier unit price
+        expr: MODIFIER_PRICE
+        data_type: NUMBER(11,2)
+        access_modifier: public_access
+      - name: MODIFIER_QUANTITY
+        description: >
+          Quantity recorded for the child modifier. Interpret the sign according to
+          the source data; do not assume a negative value always means removal unless
+          validated by the child PLU name or business rule.
+        synonyms:
+          - child quantity
+          - customisation quantity
+          - modifier units
+        expr: MODIFIER_QUANTITY
+        data_type: NUMBER(15,5)
+        access_modifier: public_access
+    metrics:
+      - name: MODIFIED_PARENT_ITEM_COUNT
+        description: Count of distinct parent-item instances that have at least one modifier row.
+        synonyms:
+          - customised item count
+          - items with modifiers
+        expr: COUNT(DISTINCT INSTANCE_ID)
+        access_modifier: public_access
+      - name: MODIFIER_ROW_COUNT
+        description: Count of modifier rows attached to sold parent items.
+        synonyms:
+          - modifier count
+          - customisation count
+          - detail row count
+        expr: COUNT(*)
+        access_modifier: public_access
+      - name: TOTAL_MODIFIER_QUANTITY
+        description: Total recorded quantity across child modifier rows.
+        synonyms:
+          - total child quantity
+          - modifier units
+        expr: SUM(MODIFIER_QUANTITY)
+        access_modifier: public_access
+      - name: TOTAL_MODIFIER_SALES_NET
+        description: Total net monetary value recorded on modifier rows.
+        synonyms:
+          - modifier net sales
+          - add-on revenue
+        expr: SUM(AMOUNT_NET)
+        access_modifier: public_access
+      - name: TOTAL_MODIFIER_SALES_GROSS
+        description: Total gross monetary value recorded on modifier rows.
+        synonyms:
+          - modifier gross sales
+          - gross add-on revenue
+        expr: SUM(AMOUNT_GROSS)
+        access_modifier: public_access
+      - name: TOTAL_MODIFIER_PRICE_VALUE
+        description: Sum of modifier price multiplied by modifier quantity.
+        synonyms:
+          - extended modifier value
+          - customisation value
+        expr: SUM(MODIFIER_PRICE * MODIFIER_QUANTITY)
+        access_modifier: public_access
+    primary_key:
+      columns:
+        - INSTANCE_ID
+        - MODIFIER_ITEM_ID
+        - PLU_CODE_CHILD
+
+  - name: V_DIM_DATE
+    description: Calendar dimension used to analyse sales and modifiers by date and fiscal year.
+    synonyms:
+      - calendar
+      - date dimension
+    base_table:
+      database: PORTFOLIO_DB
+      schema: MARTS
+      table: V_DIM_DATE
+    dimensions:
+      - name: FY
+        description: Fiscal year associated with the calendar date.
+        synonyms:
+          - fiscal year
+          - financial year
+        expr: FY
+        data_type: NUMBER(4,0)
+    time_dimensions:
+      - name: DATE_KEY
+        description: Unique calendar date used to join transaction dates.
+        synonyms:
+          - calendar date
+          - date
+        expr: DATE_KEY
+        data_type: DATE
+        unique: true
+    primary_key:
+      columns:
+        - DATE_KEY
+
+  - name: V_DIM_MEMBER_PROFILE
+    description: Customer or loyalty-member profile dimension.
+    synonyms:
+      - customers
+      - members
+      - loyalty members
+    base_table:
+      database: PORTFOLIO_DB
+      schema: MARTS
+      table: V_DIM_MEMBER_PROFILE
+    dimensions:
+      - name: MEMBER_ID
+        description: Unique customer or loyalty-member identifier.
+        synonyms:
+          - customer id
+          - loyalty id
+        expr: MEMBER_ID
+        data_type: NUMBER(6,0)
+        unique: true
+      - name: MEMBER_NAME
+        description: Display name of the customer or loyalty member.
+        synonyms:
+          - customer name
+          - member
+        expr: MEMBER_NAME
+        data_type: VARCHAR(16777216)
+    time_dimensions:
+      - name: DATE_CREATION
+        description: Date on which the member profile was created.
+        expr: DATE_CREATION
+        data_type: DATE
+      - name: DATE_EXPIRY
+        description: Date on which the membership expires or expired.
+        expr: DATE_EXPIRY
+        data_type: DATE
+      - name: DATE_REGISTRATION
+        description: Date on which the customer registered for membership.
+        expr: DATE_REGISTRATION
+        data_type: DATE
+    primary_key:
+      columns:
+        - MEMBER_ID
+
+  - name: V_DIM_PRODUCT_CODE
+    description: >
+      Parent product dimension containing saleable menu-item PLU codes. This is the
+      first product dimension to use whenever a user names or asks about an item.
+    synonyms:
+      - parent products
+      - menu items
+      - product catalogue
+      - parent plu codes
+    base_table:
+      database: PORTFOLIO_DB
+      schema: MARTS
+      table: V_DIM_PRODUCT_CODE
+    dimensions:
+      - name: CATEGORY_LEVEL_1
+        description: Highest-level business category assigned to the parent product.
+        synonyms:
+          - main category
+          - product category
+        expr: CATEGORY_LEVEL_1
+        data_type: VARCHAR(16777216)
+      - name: CATEGORY_LEVEL_2
+        description: More detailed subcategory assigned to the parent product.
+        synonyms:
+          - subcategory
+          - product subcategory
+        expr: CATEGORY_LEVEL_2
+        data_type: VARCHAR(16777216)
+      - name: PLU_CODE
+        description: Unique parent PLU code for a saleable menu item.
+        synonyms:
+          - parent plu
+          - item code
+          - product code
+        expr: PLU_CODE
+        data_type: NUMBER(4,0)
+        unique: true
+      - name: PLU_NAME
+        description: Business-friendly name of the parent saleable menu item.
+        synonyms:
+          - parent item name
+          - product name
+          - menu item
+        expr: PLU_NAME
+        data_type: VARCHAR(16777216)
+    primary_key:
+      columns:
+        - PLU_CODE
+
+  - name: V_DIM_PRODUCT_CODE_CHILD
+    description: >
+      Child PLU dimension containing modifiers, ingredients, additions, removals,
+      substitutions, and other details attached to parent menu items. Use only for
+      item-detail questions after identifying the parent item and its instances.
+    synonyms:
+      - child products
+      - modifiers
+      - ingredients
+      - customisations
+      - child plu codes
+    base_table:
+      database: PORTFOLIO_DB
+      schema: MARTS
+      table: V_DIM_PRODUCT_CODE_CHILD
+    dimensions:
+      - name: CATEGORY_LEVEL_1
+        description: Highest-level category assigned to the child modifier PLU.
+        synonyms:
+          - modifier category
+          - child category
+        expr: CATEGORY_LEVEL_1
+        data_type: VARCHAR(16777216)
+      - name: CATEGORY_LEVEL_2
+        description: Detailed subcategory assigned to the child modifier PLU.
+        synonyms:
+          - modifier subcategory
+          - child subcategory
+        expr: CATEGORY_LEVEL_2
+        data_type: VARCHAR(16777216)
+      - name: PLU_CODE
+        description: Unique child PLU code identifying an item modifier or detail.
+        synonyms:
+          - child plu
+          - modifier code
+          - ingredient code
+        expr: PLU_CODE
+        data_type: NUMBER(4,0)
+        unique: true
+      - name: PLU_NAME
+        description: Business-friendly name of the child modifier or item detail.
+        synonyms:
+          - modifier name
+          - ingredient name
+          - customisation name
+        expr: PLU_NAME
+        data_type: VARCHAR(16777216)
+    primary_key:
+      columns:
+        - PLU_CODE
+
+  - name: V_DIM_RESTAURANTS
+    description: Restaurant and store dimension used for location-based product analysis.
+    synonyms:
+      - stores
+      - restaurants
+      - locations
+    base_table:
+      database: PORTFOLIO_DB
+      schema: MARTS
+      table: V_DIM_RESTAURANTS
+    dimensions:
+      - name: OWNERSHIP_TYPE
+        description: Ownership classification of the restaurant, such as corporate or franchise.
+        synonyms:
+          - store ownership
+          - franchise type
+        expr: OWNERSHIP_TYPE
+        data_type: VARCHAR(16777216)
+      - name: STATE
+        description: State or territory in which the restaurant operates.
+        synonyms:
+          - region
+          - state name
+        expr: STATE
+        data_type: VARCHAR(16777216)
+      - name: STORE_ID
+        description: Unique identifier of the restaurant or store.
+        synonyms:
+          - restaurant id
+          - location id
+        expr: STORE_ID
+        data_type: NUMBER(4,0)
+        unique: true
+      - name: STORE_NAME
+        description: Business-friendly name of the restaurant or store.
+        synonyms:
+          - restaurant name
+          - location name
+        expr: STORE_NAME
+        data_type: VARCHAR(16777216)
+    facts:
+      - name: LATITUDE
+        description: Geographic latitude of the restaurant.
+        expr: LATITUDE
+        data_type: NUMBER(5,3)
+        access_modifier: public_access
+      - name: LONGITUDE
+        description: Geographic longitude of the restaurant.
+        expr: LONGITUDE
+        data_type: NUMBER(6,3)
+        access_modifier: public_access
+    primary_key:
+      columns:
+        - STORE_ID
+
+  - name: V_DIM_SALES_CHANNEL
+    description: Lookup dimension translating sales-channel identifiers into channel names.
+    synonyms:
+      - order channels
+      - sales channels
+    base_table:
+      database: PORTFOLIO_DB
+      schema: MARTS
+      table: V_DIM_SALES_CHANNEL
+    dimensions:
+      - name: SALES_CHANNEL_ID
+        description: Unique identifier of the sales channel.
+        synonyms:
+          - channel id
+        expr: SALES_CHANNEL_ID
+        data_type: NUMBER(2,0)
+        unique: true
+      - name: SALES_CHANNEL_NAME
+        description: Business-friendly sales-channel name.
+        synonyms:
+          - channel
+          - order channel
+        expr: SALES_CHANNEL_NAME
+        data_type: VARCHAR(16777216)
+    primary_key:
+      columns:
+        - SALES_CHANNEL_ID
+
+  - name: V_DIM_SALES_TYPE
+    description: Lookup dimension translating sales-type identifiers into business names.
+    synonyms:
+      - order types
+      - sale types
+    base_table:
+      database: PORTFOLIO_DB
+      schema: MARTS
+      table: V_DIM_SALES_TYPE
+    dimensions:
+      - name: SALES_TYPE_ID
+        description: Unique identifier of the sales type.
+        synonyms:
+          - order type id
+        expr: SALES_TYPE_ID
+        data_type: NUMBER(3,0)
+        unique: true
+      - name: SALES_TYPE_NAME
+        description: Business-friendly sales-type name.
+        synonyms:
+          - order type
+          - transaction type
+        expr: SALES_TYPE_NAME
+        data_type: VARCHAR(16777216)
+    primary_key:
+      columns:
+        - SALES_TYPE_ID
+
+relationships:
+  - name: PRODUCT_INSTANCE_TO_PARENT_PLU
+    left_table: AWS_FACT_PRODUCT_INSTANCE
+    right_table: V_DIM_PRODUCT_CODE
+    relationship_columns:
+      - left_column: PLU_CODE_PARENT
+        right_column: PLU_CODE
+
+  - name: PRODUCT_MODIFIER_TO_CHILD_PLU
+    left_table: AWS_FACT_PRODUCT_MODIFIER
+    right_table: V_DIM_PRODUCT_CODE_CHILD
+    relationship_columns:
+      - left_column: PLU_CODE_CHILD
+        right_column: PLU_CODE
+
+  - name: PRODUCT_MODIFIER_TO_PARENT_PLU
+    left_table: AWS_FACT_PRODUCT_MODIFIER
+    right_table: V_DIM_PRODUCT_CODE
+    relationship_columns:
+      - left_column: PLU_CODE_PARENT
+        right_column: PLU_CODE
+
+  - name: PRODUCT_MODIFIER_TO_PRODUCT_INSTANCE
+    left_table: AWS_FACT_PRODUCT_MODIFIER
+    right_table: AWS_FACT_PRODUCT_INSTANCE
+    relationship_columns:
+      - left_column: INSTANCE_ID
+        right_column: INSTANCE_ID
+      - left_column: PLU_CODE_PARENT
+        right_column: PLU_CODE_PARENT
+
+  - name: PRODUCT_INSTANCE_TO_DATE
+    left_table: AWS_FACT_PRODUCT_INSTANCE
+    right_table: V_DIM_DATE
+    relationship_columns:
+      - left_column: TRANSACTION_DATE
+        right_column: DATE_KEY
+
+  - name: PRODUCT_MODIFIER_TO_DATE
+    left_table: AWS_FACT_PRODUCT_MODIFIER
+    right_table: V_DIM_DATE
+    relationship_columns:
+      - left_column: TRANSACTION_DATE
+        right_column: DATE_KEY
+
+  - name: PRODUCT_INSTANCE_TO_MEMBER
+    left_table: AWS_FACT_PRODUCT_INSTANCE
+    right_table: V_DIM_MEMBER_PROFILE
+    relationship_columns:
+      - left_column: MEMBER_ID
+        right_column: MEMBER_ID
+
+  - name: PRODUCT_MODIFIER_TO_MEMBER
+    left_table: AWS_FACT_PRODUCT_MODIFIER
+    right_table: V_DIM_MEMBER_PROFILE
+    relationship_columns:
+      - left_column: MEMBER_ID
+        right_column: MEMBER_ID
+
+  - name: PRODUCT_INSTANCE_TO_RESTAURANT
+    left_table: AWS_FACT_PRODUCT_INSTANCE
+    right_table: V_DIM_RESTAURANTS
+    relationship_columns:
+      - left_column: STORE_ID
+        right_column: STORE_ID
+
+  - name: PRODUCT_MODIFIER_TO_RESTAURANT
+    left_table: AWS_FACT_PRODUCT_MODIFIER
+    right_table: V_DIM_RESTAURANTS
+    relationship_columns:
+      - left_column: STORE_ID
+        right_column: STORE_ID
+
+  - name: PRODUCT_INSTANCE_TO_SALES_CHANNEL
+    left_table: AWS_FACT_PRODUCT_INSTANCE
+    right_table: V_DIM_SALES_CHANNEL
+    relationship_columns:
+      - left_column: SALES_CHANNEL
+        right_column: SALES_CHANNEL_ID
+
+  - name: PRODUCT_MODIFIER_TO_SALES_CHANNEL
+    left_table: AWS_FACT_PRODUCT_MODIFIER
+    right_table: V_DIM_SALES_CHANNEL
+    relationship_columns:
+      - left_column: SALES_CHANNEL
+        right_column: SALES_CHANNEL_ID
+
+  - name: PRODUCT_INSTANCE_TO_SALES_TYPE
+    left_table: AWS_FACT_PRODUCT_INSTANCE
+    right_table: V_DIM_SALES_TYPE
+    relationship_columns:
+      - left_column: SALES_TYPE
+        right_column: SALES_TYPE_ID
+
+  - name: PRODUCT_MODIFIER_TO_SALES_TYPE
+    left_table: AWS_FACT_PRODUCT_MODIFIER
+    right_table: V_DIM_SALES_TYPE
+    relationship_columns:
+      - left_column: SALES_TYPE
+        right_column: SALES_TYPE_ID
+
+module_custom_instructions:
+  sql_generation: |
+    PRODUCT QUERY ROUTING RULES:
+    1. When a user asks about a named item, product, menu item, sales, revenue,
+       quantity, units sold, transactions, customers, stores, channels, or dates,
+       start with V_DIM_PRODUCT_CODE as the parent product dimension and
+       AWS_FACT_PRODUCT_INSTANCE as the authoritative fact table.
+    2. Resolve the requested parent item using V_DIM_PRODUCT_CODE.PLU_NAME or PLU_CODE,
+       then join it to AWS_FACT_PRODUCT_INSTANCE through PLU_CODE_PARENT.
+    3. Never use AWS_FACT_PRODUCT_MODIFIER to calculate parent-item sales or parent-item
+       quantity because one parent instance can have multiple modifier rows and this can
+       duplicate parent measures.
+    4. Only use AWS_FACT_PRODUCT_MODIFIER and V_DIM_PRODUCT_CODE_CHILD when the user asks
+       for details about an item, including ingredients, additions, removals,
+       substitutions, cheeses removed, sauces added, or other customisations.
+    5. For item-detail questions, preserve the parent-child path:
+       V_DIM_PRODUCT_CODE -> AWS_FACT_PRODUCT_INSTANCE -> AWS_FACT_PRODUCT_MODIFIER
+       -> V_DIM_PRODUCT_CODE_CHILD.
+    6. Connect modifier rows to their sold parent item using both INSTANCE_ID and
+       PLU_CODE_PARENT. Resolve the modifier through PLU_CODE_CHILD.
+    7. For questions such as "how many [parent item] had [child detail] removed",
+       filter the parent name in V_DIM_PRODUCT_CODE, filter the child detail name in
+       V_DIM_PRODUCT_CODE_CHILD, and count distinct AWS_FACT_PRODUCT_MODIFIER.INSTANCE_ID.
+       Use MODIFIER_QUANTITY only when the user explicitly asks for the quantity of the
+       modifier itself. Do not assume the sign of MODIFIER_QUANTITY means removal unless
+       the source data or child PLU naming confirms that rule.
+    8. When joining the instance fact to the modifier fact, aggregate parent metrics
+       before the one-to-many modifier join or use distinct parent INSTANCE_ID counts.
+    9. Use TOTAL_PARENT_ITEM_QUANTITY for units sold, SOLD_ITEM_INSTANCE_COUNT for
+       distinct sold item instances, and TRANSACTION_COUNT for distinct orders.
+    10. Use net sales by default when the user asks for sales or revenue without
+        specifying gross or net. Clearly label the measure used.
+
+  question_categorization: |
+    Classify questions naming a menu item as parent-product questions by default.
+    Classify questions mentioning additions, removals, ingredients, modifiers,
+    customisations, "with", "without", "extra", or "removed" as item-detail questions
+    that require the child PLU path while retaining the parent item context.
