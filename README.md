@@ -29,6 +29,16 @@ The project demonstrates how raw operational data can be ingested, transformed, 
 - Executive and operational reporting
 - Streamlit analytics application
 
+### Power BI Projects Sample
+- Business Summary (Overview)
+- Performance Trend
+- Trading Analysis
+- Member Engagement
+- Channel and Sales Type Report
+- Performance by Restaurants
+- Performance by Products
+
+
 Note: For Claude-Snowflake MCP sample, I could'nt proudced a sample result due to Snowflake free trial limitations, but the screenshot shows how the model is connected to Claude, expected to be able to communicate and query from Snowflake (by returning a suggested SQL query). 
 
 
