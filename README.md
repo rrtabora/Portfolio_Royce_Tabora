@@ -115,4 +115,4 @@ A lightweight in-Snowflake executive reporting app (`Executive_Report.py`) surfa
 
 I'm Royce Tabora, a Power BI & Data Analytics professional based in Melbourne, Australia, currently working as a Power BI Specialist. My background spans enterprise BI, data engineering, SQL/ETL pipelines, and cloud data platforms (Snowflake, AWS), with a growing focus on AI-native analytics tooling.
 
-📫 Connect with me on [LinkedIn](#) or explore the rest of my repositories.
+📫 Connect with me on [LinkedIn](https://www.linkedin.com/in/engrroycetabora) or explore the rest of my repositories.
