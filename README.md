@@ -20,12 +20,15 @@ The project demonstrates how raw operational data can be ingested, transformed, 
 - Customer review sentiment analysis
 - Snowflake semantic model and semantic view development
 - Snowflake Cortex Analyst preparation
+- AI-powered business insights
+- Natural-language querying through the Snowflake semantic layer
+- External AI integration through MCP
 
 ### In Progress / Next Phase
 - Power BI dashboard design
 - Executive and operational reporting
-- External AI integration through MCP
-- Natural-language querying through the Snowflake semantic layer
 - Streamlit analytics application
-- AI-powered business insights and recommendations
+
+Note: For Claude-Snowflake MCP sample, I could'nt proudced a sample result due to Snowflake free trial limitations, but the screenshot shows how the model is connected to Claude, expected to be able to communicate and query from Snowflake (by returning a suggested SQL query). 
+
 
