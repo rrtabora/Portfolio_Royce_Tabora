@@ -1,0 +1,1359 @@
+name: SV_OPERATIONS_SUMMARY
+description: 'Semantic model for restaurant operations covering inventory, wastage, supplier deliveries, supplier scorecards,
+  employee shifts, labour performance, and the consolidated daily restaurant operations view. The model uses only the OPS
+  tables and only the supporting OPS dimension views and date view available in PORTFOLIO_DB.MARTS.
+
+  '
+tables:
+- name: OPS_FACT_RESTAURANT_OPERATIONS_DAILY
+  base_table:
+    database: PORTFOLIO_DB
+    schema: MARTS
+    table: OPS_FACT_RESTAURANT_OPERATIONS_DAILY
+  dimensions:
+  - name: RESTAURANT_ID
+    description: Identifier of the restaurant represented by the daily record.
+    synonyms:
+    - store id
+    - location id
+    expr: RESTAURANT_ID
+    data_type: NUMBER(38,0)
+  time_dimensions:
+  - name: OPERATING_DATE
+    description: Calendar date of the restaurant operational activity.
+    synonyms:
+    - business date
+    - operations date
+    - work date
+    expr: OPERATING_DATE
+    data_type: DATE
+  facts:
+  - name: OPENING_INVENTORY_VALUE
+    description: Inventory value at the beginning of the operating day.
+    expr: OPENING_INVENTORY_VALUE
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: CLOSING_INVENTORY_VALUE
+    description: Inventory value at the end of the operating day.
+    expr: CLOSING_INVENTORY_VALUE
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: INVENTORY_USAGE_COST
+    description: Cost value of inventory consumed during the day.
+    synonyms:
+    - food usage cost
+    - consumption cost
+    expr: INVENTORY_USAGE_COST
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: INVENTORY_RECEIVED_VALUE
+    description: Cost value of inventory received during the day.
+    expr: INVENTORY_RECEIVED_VALUE
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: INVENTORY_WASTAGE_COST
+    description: Wastage cost recorded by the daily inventory snapshot.
+    expr: INVENTORY_WASTAGE_COST
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: INVENTORY_ADJUSTMENT_VALUE
+    description: Value of inventory adjustments recorded during the day.
+    expr: INVENTORY_ADJUSTMENT_VALUE
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: INVENTORY_PRODUCT_COUNT
+    description: Number of inventory products represented for the restaurant and day.
+    expr: INVENTORY_PRODUCT_COUNT
+    data_type: NUMBER(38,0)
+    access_modifier: public_access
+  - name: STOCKOUT_PRODUCT_COUNT
+    description: Number of products with no closing stock.
+    expr: STOCKOUT_PRODUCT_COUNT
+    data_type: NUMBER(38,0)
+    access_modifier: public_access
+  - name: BELOW_REORDER_PRODUCT_COUNT
+    description: Number of products below their reorder point.
+    expr: BELOW_REORDER_PRODUCT_COUNT
+    data_type: NUMBER(38,0)
+    access_modifier: public_access
+  - name: WASTAGE_EVENT_COUNT
+    description: Number of distinct wastage events recorded during the day.
+    expr: WASTAGE_EVENT_COUNT
+    data_type: NUMBER(38,0)
+    access_modifier: public_access
+  - name: WASTED_PRODUCT_COUNT
+    description: Number of distinct products with a wastage event.
+    expr: WASTED_PRODUCT_COUNT
+    data_type: NUMBER(38,0)
+    access_modifier: public_access
+  - name: WASTAGE_QUANTITY
+    description: Total quantity recorded in wastage events.
+    expr: WASTAGE_QUANTITY
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: WASTAGE_COST
+    description: Total cost recorded in wastage events.
+    expr: WASTAGE_COST
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: DELIVERY_COUNT
+    description: Number of supplier deliveries received during the day.
+    expr: DELIVERY_COUNT
+    data_type: NUMBER(38,0)
+    access_modifier: public_access
+  - name: SUPPLIER_COUNT
+    description: Number of distinct suppliers delivering during the day.
+    expr: SUPPLIER_COUNT
+    data_type: NUMBER(38,0)
+    access_modifier: public_access
+  - name: ORDERED_QUANTITY
+    description: Quantity expected across deliveries received on the day.
+    expr: ORDERED_QUANTITY
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: RECEIVED_QUANTITY
+    description: Quantity physically received across deliveries.
+    expr: RECEIVED_QUANTITY
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: ACCEPTED_QUANTITY
+    description: Received quantity accepted after quality checks.
+    expr: ACCEPTED_QUANTITY
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: REJECTED_QUANTITY
+    description: Received quantity rejected after quality checks.
+    expr: REJECTED_QUANTITY
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: ON_TIME_DELIVERY_COUNT
+    description: Number of deliveries arriving on or before the promised date.
+    expr: ON_TIME_DELIVERY_COUNT
+    data_type: NUMBER(38,0)
+    access_modifier: public_access
+  - name: IN_FULL_DELIVERY_COUNT
+    description: Number of deliveries received in full.
+    expr: IN_FULL_DELIVERY_COUNT
+    data_type: NUMBER(38,0)
+    access_modifier: public_access
+  - name: OTIF_DELIVERY_COUNT
+    description: Number of deliveries received both on time and in full.
+    expr: OTIF_DELIVERY_COUNT
+    data_type: NUMBER(38,0)
+    access_modifier: public_access
+  - name: SCHEDULED_HOURS
+    description: Total employee hours scheduled for the restaurant and day.
+    expr: SCHEDULED_HOURS
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: ACTUAL_HOURS
+    description: Total employee hours actually worked.
+    expr: ACTUAL_HOURS
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: REGULAR_HOURS
+    description: Total regular hours worked excluding overtime.
+    expr: REGULAR_HOURS
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: OVERTIME_HOURS
+    description: Total overtime hours worked.
+    expr: OVERTIME_HOURS
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: LABOUR_COST
+    description: Total labour cost for the restaurant and day.
+    expr: LABOUR_COST
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: ABSENCE_COUNT
+    description: Number of employee absences recorded for the day.
+    expr: ABSENCE_COUNT
+    data_type: NUMBER(38,0)
+    access_modifier: public_access
+  - name: NO_SHOW_COUNT
+    description: Number of scheduled shifts classified as no-show.
+    expr: NO_SHOW_COUNT
+    data_type: NUMBER(38,0)
+    access_modifier: public_access
+  - name: ESTIMATED_SALES
+    description: 'Synthetic estimated sales supplied by the labour dataset. This is not actual transaction revenue and must
+      always be labelled as estimated sales.
+
+      '
+    expr: ESTIMATED_SALES
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: ESTIMATED_PRIME_COST
+    description: Inventory usage cost plus labour cost based on the supplied dataset.
+    expr: ESTIMATED_PRIME_COST
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: ESTIMATED_CONTRIBUTION_AFTER_LABOUR
+    description: 'Estimated sales less inventory usage, wastage, and labour cost. This is an operational estimate rather than
+      an accounting profit measure.
+
+      '
+    expr: ESTIMATED_CONTRIBUTION_AFTER_LABOUR
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  metrics:
+  - name: TOTAL_ESTIMATED_SALES
+    description: Total synthetic estimated sales over the selected restaurants and dates.
+    expr: SUM(ESTIMATED_SALES)
+    access_modifier: public_access
+  - name: TOTAL_LABOUR_COST
+    description: Total labour cost.
+    expr: SUM(LABOUR_COST)
+    access_modifier: public_access
+  - name: TOTAL_INVENTORY_USAGE_COST
+    description: Total cost of inventory consumed.
+    expr: SUM(INVENTORY_USAGE_COST)
+    access_modifier: public_access
+  - name: TOTAL_WASTAGE_COST
+    description: Total event-level wastage cost.
+    expr: SUM(WASTAGE_COST)
+    access_modifier: public_access
+  - name: TOTAL_ESTIMATED_PRIME_COST
+    description: Total estimated prime cost.
+    expr: SUM(ESTIMATED_PRIME_COST)
+    access_modifier: public_access
+  - name: ESTIMATED_LABOUR_COST_RATE
+    description: Labour cost as a proportion of estimated sales.
+    expr: SUM(LABOUR_COST) / NULLIF(SUM(ESTIMATED_SALES), 0)
+    access_modifier: public_access
+  - name: ESTIMATED_INVENTORY_USAGE_RATE
+    description: Inventory usage cost as a proportion of estimated sales.
+    expr: SUM(INVENTORY_USAGE_COST) / NULLIF(SUM(ESTIMATED_SALES), 0)
+    access_modifier: public_access
+  - name: ESTIMATED_WASTAGE_COST_RATE
+    description: Wastage cost as a proportion of estimated sales.
+    expr: SUM(WASTAGE_COST) / NULLIF(SUM(ESTIMATED_SALES), 0)
+    access_modifier: public_access
+  - name: ESTIMATED_PRIME_COST_RATE
+    description: Estimated prime cost as a proportion of estimated sales.
+    expr: SUM(ESTIMATED_PRIME_COST) / NULLIF(SUM(ESTIMATED_SALES), 0)
+    access_modifier: public_access
+  - name: ESTIMATED_SALES_PER_LABOUR_HOUR
+    description: Estimated sales generated per actual labour hour.
+    expr: SUM(ESTIMATED_SALES) / NULLIF(SUM(ACTUAL_HOURS), 0)
+    access_modifier: public_access
+  - name: OTIF_RATE
+    description: Proportion of deliveries received on time and in full.
+    expr: SUM(OTIF_DELIVERY_COUNT) / NULLIF(SUM(DELIVERY_COUNT), 0)
+    access_modifier: public_access
+  - name: STOCKOUT_RATE
+    description: Proportion of represented products that were stocked out.
+    expr: SUM(STOCKOUT_PRODUCT_COUNT) / NULLIF(SUM(INVENTORY_PRODUCT_COUNT), 0)
+    access_modifier: public_access
+  primary_key:
+    columns:
+    - OPERATING_DATE
+    - RESTAURANT_ID
+- name: OPS_FACT_INVENTORY_PERFORMANCE_DAILY
+  base_table:
+    database: PORTFOLIO_DB
+    schema: MARTS
+    table: OPS_FACT_INVENTORY_PERFORMANCE_DAILY
+  dimensions:
+  - name: INVENTORY_PERFORMANCE_KEY
+    description: Unique key for one product, restaurant, and snapshot date.
+    expr: INVENTORY_PERFORMANCE_KEY
+    data_type: VARCHAR(16777216)
+  - name: RESTAURANT_ID
+    description: Restaurant holding the inventory.
+    expr: RESTAURANT_ID
+    data_type: NUMBER(38,0)
+  - name: PRODUCT_ID
+    description: Identifier of the inventory product.
+    synonyms:
+    - ingredient id
+    - stock item id
+    expr: PRODUCT_ID
+    data_type: VARCHAR(16777216)
+  - name: STOCKOUT_FLAG
+    description: Source flag indicating whether the product was stocked out.
+    expr: STOCKOUT_FLAG
+    data_type: BOOLEAN
+  - name: BELOW_REORDER_FLAG
+    description: Source flag indicating whether closing stock was below reorder point.
+    expr: BELOW_REORDER_FLAG
+    data_type: BOOLEAN
+  - name: CALCULATED_STOCKOUT_FLAG
+    description: True when calculated closing stock is zero or lower.
+    expr: CALCULATED_STOCKOUT_FLAG
+    data_type: BOOLEAN
+  - name: CALCULATED_BELOW_REORDER_FLAG
+    description: True when closing stock is below the reorder point.
+    expr: CALCULATED_BELOW_REORDER_FLAG
+    data_type: BOOLEAN
+  time_dimensions:
+  - name: SNAPSHOT_DATE
+    description: Date of the inventory snapshot.
+    expr: SNAPSHOT_DATE
+    data_type: DATE
+  facts:
+  - name: OPENING_STOCK_QTY
+    description: Opening stock quantity.
+    expr: OPENING_STOCK_QTY
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: RECEIVED_QTY
+    description: Quantity received.
+    expr: RECEIVED_QTY
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: USAGE_QTY
+    description: Quantity consumed.
+    expr: USAGE_QTY
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: WASTAGE_QTY
+    description: Quantity recorded as wastage.
+    expr: WASTAGE_QTY
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: ADJUSTMENT_QTY
+    description: Inventory adjustment quantity.
+    expr: ADJUSTMENT_QTY
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: CLOSING_STOCK_QTY
+    description: Closing stock quantity.
+    expr: CLOSING_STOCK_QTY
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: REORDER_POINT_QTY
+    description: Quantity level that triggers replenishment.
+    expr: REORDER_POINT_QTY
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: TARGET_STOCK_QTY
+    description: Desired stock quantity.
+    expr: TARGET_STOCK_QTY
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: UNIT_COST
+    description: Unit cost of the product.
+    expr: UNIT_COST
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: CALCULATED_INVENTORY_VALUE
+    description: Closing stock quantity multiplied by unit cost.
+    expr: CALCULATED_INVENTORY_VALUE
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: OPENING_INVENTORY_VALUE
+    description: Opening inventory value.
+    expr: OPENING_INVENTORY_VALUE
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: RECEIVED_VALUE
+    description: Value of inventory received.
+    expr: RECEIVED_VALUE
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: USAGE_COST
+    description: Cost of inventory consumed.
+    expr: USAGE_COST
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: WASTAGE_COST
+    description: Cost of quantity recorded as wastage.
+    expr: WASTAGE_COST
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: INVENTORY_VARIANCE_QTY
+    description: Actual closing quantity less expected closing quantity.
+    expr: INVENTORY_VARIANCE_QTY
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: INVENTORY_VARIANCE_VALUE
+    description: Inventory variance quantity valued at unit cost.
+    expr: INVENTORY_VARIANCE_VALUE
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: REORDER_GAP_QTY
+    description: Quantity needed to reach the reorder point.
+    expr: REORDER_GAP_QTY
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: ESTIMATED_REORDER_VALUE
+    description: Estimated value needed to replenish to target stock.
+    expr: ESTIMATED_REORDER_VALUE
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: DAYS_OF_STOCK_7D
+    description: Days of stock based on trailing seven-day average usage.
+    expr: DAYS_OF_STOCK_7D
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: DAYS_OF_STOCK_28D
+    description: Days of stock based on trailing twenty-eight-day average usage.
+    expr: DAYS_OF_STOCK_28D
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  metrics:
+  - name: TOTAL_CLOSING_INVENTORY_VALUE
+    description: Total closing inventory value.
+    expr: SUM(CALCULATED_INVENTORY_VALUE)
+    access_modifier: public_access
+  - name: TOTAL_INVENTORY_USAGE_COST
+    description: Total inventory usage cost.
+    expr: SUM(USAGE_COST)
+    access_modifier: public_access
+  - name: TOTAL_INVENTORY_WASTAGE_COST
+    description: Total inventory-recorded wastage cost.
+    expr: SUM(WASTAGE_COST)
+    access_modifier: public_access
+  - name: TOTAL_INVENTORY_VARIANCE_VALUE
+    description: Total inventory variance value.
+    expr: SUM(INVENTORY_VARIANCE_VALUE)
+    access_modifier: public_access
+  - name: TOTAL_ESTIMATED_REORDER_VALUE
+    description: Total estimated replenishment value.
+    expr: SUM(ESTIMATED_REORDER_VALUE)
+    access_modifier: public_access
+  - name: STOCKOUT_PRODUCT_COUNT
+    description: Count of product-day rows that were stocked out.
+    expr: COUNT_IF(CALCULATED_STOCKOUT_FLAG)
+    access_modifier: public_access
+  - name: BELOW_REORDER_PRODUCT_COUNT
+    description: Count of product-day rows below reorder point.
+    expr: COUNT_IF(CALCULATED_BELOW_REORDER_FLAG)
+    access_modifier: public_access
+  - name: AVERAGE_DAYS_OF_STOCK_7D
+    description: Average days of stock based on seven-day usage.
+    expr: AVG(DAYS_OF_STOCK_7D)
+    access_modifier: public_access
+  primary_key:
+    columns:
+    - INVENTORY_PERFORMANCE_KEY
+- name: OPS_FACT_INVENTORY_WASTAGE_DAILY
+  base_table:
+    database: PORTFOLIO_DB
+    schema: MARTS
+    table: OPS_FACT_INVENTORY_WASTAGE_DAILY
+  dimensions:
+  - name: WASTAGE_DAILY_KEY
+    description: Unique key for date, restaurant, product, and wastage reason.
+    expr: WASTAGE_DAILY_KEY
+    data_type: VARCHAR(16777216)
+  - name: RESTAURANT_ID
+    description: Restaurant where wastage occurred.
+    expr: RESTAURANT_ID
+    data_type: NUMBER(38,0)
+  - name: PRODUCT_ID
+    description: Product affected by wastage.
+    expr: PRODUCT_ID
+    data_type: VARCHAR(16777216)
+  - name: WASTAGE_REASON
+    description: Business reason assigned to the wastage event.
+    synonyms:
+    - waste reason
+    - spoilage reason
+    - cause of waste
+    expr: WASTAGE_REASON
+    data_type: VARCHAR(16777216)
+  time_dimensions:
+  - name: EVENT_DATE
+    description: Date the wastage occurred.
+    expr: EVENT_DATE
+    data_type: DATE
+  facts:
+  - name: WASTAGE_EVENT_COUNT
+    description: Number of distinct wastage events.
+    expr: WASTAGE_EVENT_COUNT
+    data_type: NUMBER(38,0)
+    access_modifier: public_access
+  - name: WASTAGE_QTY
+    description: Total wastage quantity.
+    expr: WASTAGE_QTY
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: WASTAGE_COST
+    description: Total wastage cost.
+    expr: WASTAGE_COST
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: AVERAGE_UNIT_COST
+    description: Average unit cost across wastage events.
+    expr: AVERAGE_UNIT_COST
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: USAGE_QTY
+    description: Inventory usage quantity for reconciliation.
+    expr: USAGE_QTY
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: INVENTORY_RECORDED_WASTAGE_QTY
+    description: Wastage quantity recorded in the inventory snapshot.
+    expr: INVENTORY_RECORDED_WASTAGE_QTY
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: WASTAGE_RATE
+    description: Wastage quantity divided by usage plus wastage quantity.
+    expr: WASTAGE_RATE
+    data_type: NUMBER(38,8)
+    access_modifier: public_access
+  - name: WASTAGE_RECONCILIATION_VARIANCE_QTY
+    description: Event wastage quantity less inventory-recorded wastage quantity.
+    expr: WASTAGE_RECONCILIATION_VARIANCE_QTY
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  metrics:
+  - name: TOTAL_WASTAGE_EVENTS
+    description: Total wastage event count.
+    expr: SUM(WASTAGE_EVENT_COUNT)
+    access_modifier: public_access
+  - name: TOTAL_WASTAGE_QUANTITY
+    description: Total wastage quantity.
+    expr: SUM(WASTAGE_QTY)
+    access_modifier: public_access
+  - name: TOTAL_WASTAGE_COST
+    description: Total wastage cost.
+    expr: SUM(WASTAGE_COST)
+    access_modifier: public_access
+  - name: WEIGHTED_WASTAGE_RATE
+    description: Wastage quantity divided by total usage plus wastage.
+    expr: SUM(WASTAGE_QTY) / NULLIF(SUM(USAGE_QTY) + SUM(WASTAGE_QTY), 0)
+    access_modifier: public_access
+  primary_key:
+    columns:
+    - WASTAGE_DAILY_KEY
+- name: OPS_FACT_SUPPLIER_DELIVERY_PERFORMANCE
+  base_table:
+    database: PORTFOLIO_DB
+    schema: MARTS
+    table: OPS_FACT_SUPPLIER_DELIVERY_PERFORMANCE
+  dimensions:
+  - name: DELIVERY_PERFORMANCE_KEY
+    description: Unique delivery performance key.
+    expr: DELIVERY_PERFORMANCE_KEY
+    data_type: VARCHAR(16777216)
+  - name: DELIVERY_ID
+    description: Unique supplier delivery identifier.
+    expr: DELIVERY_ID
+    data_type: VARCHAR(16777216)
+  - name: PURCHASE_ORDER_ID
+    description: Purchase order associated with the delivery.
+    expr: PURCHASE_ORDER_ID
+    data_type: VARCHAR(16777216)
+  - name: SUPPLIER_ID
+    description: Supplier responsible for the delivery.
+    expr: SUPPLIER_ID
+    data_type: VARCHAR(16777216)
+  - name: RESTAURANT_ID
+    description: Restaurant receiving the delivery.
+    expr: RESTAURANT_ID
+    data_type: NUMBER(38,0)
+  - name: PRODUCT_ID
+    description: Product delivered.
+    expr: PRODUCT_ID
+    data_type: VARCHAR(16777216)
+  - name: PURCHASE_ORDER_STATUS
+    description: Current purchase-order status.
+    expr: PURCHASE_ORDER_STATUS
+    data_type: VARCHAR(16777216)
+  - name: ON_TIME_FLAG
+    description: True when the delivery arrived on or before the promised date.
+    expr: ON_TIME_FLAG
+    data_type: BOOLEAN
+  - name: IN_FULL_FLAG
+    description: True when the ordered quantity was received in full.
+    expr: IN_FULL_FLAG
+    data_type: BOOLEAN
+  - name: OTIF_FLAG
+    description: True when the delivery was both on time and in full.
+    expr: OTIF_FLAG
+    data_type: BOOLEAN
+  - name: DELIVERY_STATUS
+    description: Delivery classification such as on-time-in-full, late, short, or late-and-short.
+    expr: DELIVERY_STATUS
+    data_type: VARCHAR(16777216)
+  time_dimensions:
+  - name: ORDER_DATE
+    description: Date the purchase order was placed.
+    expr: ORDER_DATE
+    data_type: DATE
+  - name: PROMISED_DELIVERY_DATE
+    description: Date the supplier promised delivery.
+    expr: PROMISED_DELIVERY_DATE
+    data_type: DATE
+  - name: ACTUAL_DELIVERY_DATE
+    description: Date the delivery was actually received.
+    expr: ACTUAL_DELIVERY_DATE
+    data_type: DATE
+  facts:
+  - name: ORDERED_QTY
+    description: Quantity ordered.
+    expr: ORDERED_QTY
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: RECEIVED_QTY
+    description: Quantity received.
+    expr: RECEIVED_QTY
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: ACCEPTED_QTY
+    description: Quantity accepted.
+    expr: ACCEPTED_QTY
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: REJECTED_QTY
+    description: Quantity rejected.
+    expr: REJECTED_QTY
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: DELIVERY_DELAY_DAYS
+    description: Days between promised and actual delivery.
+    expr: DELIVERY_DELAY_DAYS
+    data_type: NUMBER(38,0)
+    access_modifier: public_access
+  - name: QUALITY_SCORE
+    description: Quality score assigned to the delivery.
+    expr: QUALITY_SCORE
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: PURCHASE_ORDER_UNIT_COST
+    description: Unit cost from the purchase order.
+    expr: PURCHASE_ORDER_UNIT_COST
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: CALCULATED_ORDER_VALUE
+    description: Ordered quantity multiplied by purchase-order unit cost.
+    expr: CALCULATED_ORDER_VALUE
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: RECEIVED_VALUE
+    description: Received quantity valued at purchase-order unit cost.
+    expr: RECEIVED_VALUE
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: ACCEPTED_VALUE
+    description: Accepted quantity valued at purchase-order unit cost.
+    expr: ACCEPTED_VALUE
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: REJECTED_VALUE
+    description: Rejected quantity valued at purchase-order unit cost.
+    expr: REJECTED_VALUE
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: SHORT_DELIVERY_QTY
+    description: Ordered quantity not received.
+    expr: SHORT_DELIVERY_QTY
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: SHORT_DELIVERY_VALUE
+    description: Value of ordered quantity not received.
+    expr: SHORT_DELIVERY_VALUE
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: FILL_RATE
+    description: Received quantity divided by ordered quantity.
+    expr: FILL_RATE
+    data_type: NUMBER(38,8)
+    access_modifier: public_access
+  - name: ACCEPTANCE_RATE
+    description: Accepted quantity divided by received quantity.
+    expr: ACCEPTANCE_RATE
+    data_type: NUMBER(38,8)
+    access_modifier: public_access
+  - name: REJECTION_RATE
+    description: Rejected quantity divided by received quantity.
+    expr: REJECTION_RATE
+    data_type: NUMBER(38,8)
+    access_modifier: public_access
+  - name: ACTUAL_LEAD_TIME_DAYS
+    description: Days from order date to actual delivery date.
+    expr: ACTUAL_LEAD_TIME_DAYS
+    data_type: NUMBER(38,0)
+    access_modifier: public_access
+  metrics:
+  - name: DELIVERY_COUNT
+    description: Count of distinct deliveries.
+    expr: COUNT(DISTINCT DELIVERY_ID)
+    access_modifier: public_access
+  - name: TOTAL_ORDER_VALUE
+    description: Total calculated order value.
+    expr: SUM(CALCULATED_ORDER_VALUE)
+    access_modifier: public_access
+  - name: TOTAL_RECEIVED_VALUE
+    description: Total value received.
+    expr: SUM(RECEIVED_VALUE)
+    access_modifier: public_access
+  - name: TOTAL_REJECTED_VALUE
+    description: Total value rejected.
+    expr: SUM(REJECTED_VALUE)
+    access_modifier: public_access
+  - name: TOTAL_SHORT_DELIVERY_VALUE
+    description: Total value not received.
+    expr: SUM(SHORT_DELIVERY_VALUE)
+    access_modifier: public_access
+  - name: ON_TIME_DELIVERY_RATE
+    description: Proportion of deliveries received on time.
+    expr: AVG(IFF(ON_TIME_FLAG, 1, 0))
+    access_modifier: public_access
+  - name: IN_FULL_DELIVERY_RATE
+    description: Proportion of deliveries received in full.
+    expr: AVG(IFF(IN_FULL_FLAG, 1, 0))
+    access_modifier: public_access
+  - name: OTIF_RATE
+    description: Proportion of deliveries received on time and in full.
+    expr: AVG(IFF(OTIF_FLAG, 1, 0))
+    access_modifier: public_access
+  - name: WEIGHTED_FILL_RATE
+    description: Total received quantity divided by total ordered quantity.
+    expr: SUM(RECEIVED_QTY) / NULLIF(SUM(ORDERED_QTY), 0)
+    access_modifier: public_access
+  - name: AVERAGE_QUALITY_SCORE
+    description: Average delivery quality score.
+    expr: AVG(QUALITY_SCORE)
+    access_modifier: public_access
+  - name: AVERAGE_DELIVERY_DELAY_DAYS
+    description: Average number of delivery delay days.
+    expr: AVG(DELIVERY_DELAY_DAYS)
+    access_modifier: public_access
+  primary_key:
+    columns:
+    - DELIVERY_PERFORMANCE_KEY
+- name: OPS_AGG_SUPPLIER_SCORE_CARD_MONTHLY
+  base_table:
+    database: PORTFOLIO_DB
+    schema: MARTS
+    table: OPS_AGG_SUPPLIER_SCORE_CARD_MONTHLY
+  dimensions:
+  - name: SUPPLIER_SCORECARD_KEY
+    description: Unique key for supplier and month.
+    expr: SUPPLIER_SCORECARD_KEY
+    data_type: VARCHAR(16777216)
+  - name: SUPPLIER_ID
+    description: Supplier represented by the monthly scorecard.
+    expr: SUPPLIER_ID
+    data_type: VARCHAR(16777216)
+  time_dimensions:
+  - name: DELIVERY_MONTH
+    description: Month of the supplier scorecard.
+    expr: DELIVERY_MONTH
+    data_type: DATE
+  facts:
+  - name: PURCHASE_ORDER_COUNT
+    description: Distinct purchase orders in the month.
+    expr: PURCHASE_ORDER_COUNT
+    data_type: NUMBER(38,0)
+    access_modifier: public_access
+  - name: DELIVERY_COUNT
+    description: Distinct deliveries in the month.
+    expr: DELIVERY_COUNT
+    data_type: NUMBER(38,0)
+    access_modifier: public_access
+  - name: TOTAL_ORDERED_QTY
+    description: Total ordered quantity.
+    expr: TOTAL_ORDERED_QTY
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: TOTAL_RECEIVED_QTY
+    description: Total received quantity.
+    expr: TOTAL_RECEIVED_QTY
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: TOTAL_ACCEPTED_QTY
+    description: Total accepted quantity.
+    expr: TOTAL_ACCEPTED_QTY
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: TOTAL_REJECTED_QTY
+    description: Total rejected quantity.
+    expr: TOTAL_REJECTED_QTY
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: TOTAL_ORDER_VALUE
+    description: Total order value.
+    expr: TOTAL_ORDER_VALUE
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: TOTAL_REJECTED_VALUE
+    description: Total rejected value.
+    expr: TOTAL_REJECTED_VALUE
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: TOTAL_SHORT_DELIVERY_VALUE
+    description: Total value of short deliveries.
+    expr: TOTAL_SHORT_DELIVERY_VALUE
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: ON_TIME_DELIVERY_RATE
+    description: Monthly on-time delivery rate.
+    expr: ON_TIME_DELIVERY_RATE
+    data_type: NUMBER(38,8)
+    access_modifier: public_access
+  - name: IN_FULL_DELIVERY_RATE
+    description: Monthly in-full delivery rate.
+    expr: IN_FULL_DELIVERY_RATE
+    data_type: NUMBER(38,8)
+    access_modifier: public_access
+  - name: OTIF_RATE
+    description: Monthly on-time-in-full rate.
+    expr: OTIF_RATE
+    data_type: NUMBER(38,8)
+    access_modifier: public_access
+  - name: FILL_RATE
+    description: Monthly received quantity divided by ordered quantity.
+    expr: FILL_RATE
+    data_type: NUMBER(38,8)
+    access_modifier: public_access
+  - name: ACCEPTANCE_RATE
+    description: Monthly accepted quantity divided by received quantity.
+    expr: ACCEPTANCE_RATE
+    data_type: NUMBER(38,8)
+    access_modifier: public_access
+  - name: REJECTION_RATE
+    description: Monthly rejected quantity divided by received quantity.
+    expr: REJECTION_RATE
+    data_type: NUMBER(38,8)
+    access_modifier: public_access
+  - name: AVERAGE_DELIVERY_DELAY_DAYS
+    description: Average delivery delay days.
+    expr: AVERAGE_DELIVERY_DELAY_DAYS
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: AVERAGE_ACTUAL_LEAD_TIME_DAYS
+    description: Average actual supplier lead time.
+    expr: AVERAGE_ACTUAL_LEAD_TIME_DAYS
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: AVERAGE_QUALITY_SCORE
+    description: Average supplier quality score.
+    expr: AVERAGE_QUALITY_SCORE
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: SUPPLIER_PERFORMANCE_SCORE
+    description: Weighted supplier performance score from zero to one hundred.
+    expr: SUPPLIER_PERFORMANCE_SCORE
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  metrics:
+  - name: AVERAGE_SUPPLIER_PERFORMANCE_SCORE
+    description: Average supplier performance score.
+    expr: AVG(SUPPLIER_PERFORMANCE_SCORE)
+    access_modifier: public_access
+  - name: WEIGHTED_MONTHLY_OTIF_RATE
+    description: Delivery-count-weighted monthly OTIF rate.
+    expr: SUM(OTIF_RATE * DELIVERY_COUNT) / NULLIF(SUM(DELIVERY_COUNT), 0)
+    access_modifier: public_access
+  - name: TOTAL_MONTHLY_ORDER_VALUE
+    description: Total order value represented by monthly scorecards.
+    expr: SUM(TOTAL_ORDER_VALUE)
+    access_modifier: public_access
+  - name: TOTAL_MONTHLY_REJECTED_VALUE
+    description: Total rejected value represented by monthly scorecards.
+    expr: SUM(TOTAL_REJECTED_VALUE)
+    access_modifier: public_access
+  primary_key:
+    columns:
+    - SUPPLIER_SCORECARD_KEY
+- name: OPS_FACT_EMPLOYEE_SHIFT_PERFORMANCE
+  base_table:
+    database: PORTFOLIO_DB
+    schema: MARTS
+    table: OPS_FACT_EMPLOYEE_SHIFT_PERFORMANCE
+  dimensions:
+  - name: SHIFT_PERFORMANCE_KEY
+    description: Unique shift performance key.
+    expr: SHIFT_PERFORMANCE_KEY
+    data_type: VARCHAR(16777216)
+  - name: SHIFT_ID
+    description: Unique shift identifier.
+    expr: SHIFT_ID
+    data_type: VARCHAR(16777216)
+  - name: RESTAURANT_ID
+    description: Restaurant where the shift was scheduled.
+    expr: RESTAURANT_ID
+    data_type: NUMBER(38,0)
+  - name: EMPLOYEE_ID
+    description: Employee assigned to the shift.
+    expr: EMPLOYEE_ID
+    data_type: VARCHAR(16777216)
+  - name: JOB_ROLE
+    description: Job role worked during the shift.
+    expr: JOB_ROLE
+    data_type: VARCHAR(16777216)
+  - name: ABSENCE_FLAG
+    description: True when the shift was recorded as an absence.
+    expr: ABSENCE_FLAG
+    data_type: BOOLEAN
+  - name: NO_SHOW_FLAG
+    description: True when the employee did not attend the shift.
+    expr: NO_SHOW_FLAG
+    data_type: BOOLEAN
+  - name: OVERTIME_FLAG
+    description: True when overtime hours were recorded.
+    expr: OVERTIME_FLAG
+    data_type: BOOLEAN
+  - name: ATTENDANCE_STATUS
+    description: Derived attendance category for the shift.
+    expr: ATTENDANCE_STATUS
+    data_type: VARCHAR(16777216)
+  time_dimensions:
+  - name: SHIFT_DATE
+    description: Date of the employee shift.
+    expr: SHIFT_DATE
+    data_type: DATE
+  - name: SCHEDULED_START_TIME
+    description: Scheduled shift start time.
+    expr: SCHEDULED_START_TIME
+    data_type: TIME(9)
+  - name: SCHEDULED_END_TIME
+    description: Scheduled shift end time.
+    expr: SCHEDULED_END_TIME
+    data_type: TIME(9)
+  facts:
+  - name: SCHEDULED_HOURS
+    description: Hours scheduled for the shift.
+    expr: SCHEDULED_HOURS
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: ACTUAL_HOURS
+    description: Hours actually worked.
+    expr: ACTUAL_HOURS
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: REGULAR_HOURS
+    description: Regular hours worked.
+    expr: REGULAR_HOURS
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: OVERTIME_HOURS
+    description: Overtime hours worked.
+    expr: OVERTIME_HOURS
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: HOURLY_RATE
+    description: Hourly pay rate applied to the shift.
+    expr: HOURLY_RATE
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: LABOUR_COST
+    description: Labour cost recorded for the shift.
+    expr: LABOUR_COST
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: HOURS_VARIANCE
+    description: Actual hours less scheduled hours.
+    expr: HOURS_VARIANCE
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: ABSOLUTE_HOURS_VARIANCE
+    description: Absolute difference between actual and scheduled hours.
+    expr: ABSOLUTE_HOURS_VARIANCE
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: SCHEDULE_ADHERENCE_RATE
+    description: Actual scheduled-hour coverage capped at the scheduled hours.
+    expr: SCHEDULE_ADHERENCE_RATE
+    data_type: NUMBER(38,8)
+    access_modifier: public_access
+  - name: CALCULATED_REGULAR_LABOUR_COST
+    description: Regular hours multiplied by hourly rate.
+    expr: CALCULATED_REGULAR_LABOUR_COST
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: CALCULATED_OVERTIME_LABOUR_COST
+    description: Overtime hours multiplied by hourly rate and overtime multiplier.
+    expr: CALCULATED_OVERTIME_LABOUR_COST
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: LABOUR_COST_VARIANCE
+    description: Source labour cost less calculated regular and overtime cost.
+    expr: LABOUR_COST_VARIANCE
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  metrics:
+  - name: SHIFT_COUNT
+    description: Count of distinct shifts.
+    expr: COUNT(DISTINCT SHIFT_ID)
+    access_modifier: public_access
+  - name: EMPLOYEE_COUNT
+    description: Count of distinct employees with shifts.
+    expr: COUNT(DISTINCT EMPLOYEE_ID)
+    access_modifier: public_access
+  - name: TOTAL_SCHEDULED_HOURS
+    description: Total scheduled hours.
+    expr: SUM(SCHEDULED_HOURS)
+    access_modifier: public_access
+  - name: TOTAL_ACTUAL_HOURS
+    description: Total actual hours.
+    expr: SUM(ACTUAL_HOURS)
+    access_modifier: public_access
+  - name: TOTAL_OVERTIME_HOURS
+    description: Total overtime hours.
+    expr: SUM(OVERTIME_HOURS)
+    access_modifier: public_access
+  - name: TOTAL_SHIFT_LABOUR_COST
+    description: Total shift labour cost.
+    expr: SUM(LABOUR_COST)
+    access_modifier: public_access
+  - name: ABSENCE_SHIFT_COUNT
+    description: Number of shifts marked absent.
+    expr: COUNT_IF(ABSENCE_FLAG)
+    access_modifier: public_access
+  - name: NO_SHOW_SHIFT_COUNT
+    description: Number of shifts marked as no-show.
+    expr: COUNT_IF(NO_SHOW_FLAG)
+    access_modifier: public_access
+  - name: OVERTIME_SHIFT_COUNT
+    description: Number of shifts containing overtime.
+    expr: COUNT_IF(OVERTIME_FLAG)
+    access_modifier: public_access
+  - name: AGGREGATE_SCHEDULE_ADHERENCE_RATE
+    description: Total actual coverage relative to total scheduled hours.
+    expr: SUM(LEAST(ACTUAL_HOURS, SCHEDULED_HOURS)) / NULLIF(SUM(SCHEDULED_HOURS), 0)
+    access_modifier: public_access
+  primary_key:
+    columns:
+    - SHIFT_PERFORMANCE_KEY
+- name: OPS_FACT_RESTAURANT_LABOUR_PERFORMANCE
+  base_table:
+    database: PORTFOLIO_DB
+    schema: MARTS
+    table: OPS_FACT_RESTAURANT_LABOUR_PERFORMANCE
+  dimensions:
+  - name: LABOUR_PERFORMANCE_KEY
+    description: Unique key for restaurant and work date.
+    expr: LABOUR_PERFORMANCE_KEY
+    data_type: VARCHAR(16777216)
+  - name: RESTAURANT_ID
+    description: Restaurant represented by the labour record.
+    expr: RESTAURANT_ID
+    data_type: NUMBER(38,0)
+  time_dimensions:
+  - name: WORK_DATE
+    description: Date of the labour activity.
+    expr: WORK_DATE
+    data_type: DATE
+  facts:
+  - name: SHIFT_COUNT
+    description: Number of scheduled shifts.
+    expr: SHIFT_COUNT
+    data_type: NUMBER(38,0)
+    access_modifier: public_access
+  - name: EMPLOYEES_SCHEDULED_COUNT
+    description: Distinct employees scheduled.
+    expr: EMPLOYEES_SCHEDULED_COUNT
+    data_type: NUMBER(38,0)
+    access_modifier: public_access
+  - name: EMPLOYEES_WORKED_COUNT
+    description: Distinct employees with actual worked hours.
+    expr: EMPLOYEES_WORKED_COUNT
+    data_type: NUMBER(38,0)
+    access_modifier: public_access
+  - name: CALCULATED_SCHEDULED_HOURS
+    description: Scheduled hours aggregated from shift records.
+    expr: CALCULATED_SCHEDULED_HOURS
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: CALCULATED_ACTUAL_HOURS
+    description: Actual hours aggregated from shift records.
+    expr: CALCULATED_ACTUAL_HOURS
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: CALCULATED_REGULAR_HOURS
+    description: Regular hours aggregated from shift records.
+    expr: CALCULATED_REGULAR_HOURS
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: CALCULATED_OVERTIME_HOURS
+    description: Overtime hours aggregated from shift records.
+    expr: CALCULATED_OVERTIME_HOURS
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: CALCULATED_LABOUR_COST
+    description: Labour cost aggregated from shift records.
+    expr: CALCULATED_LABOUR_COST
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: CALCULATED_ABSENCE_COUNT
+    description: Number of absent shift records.
+    expr: CALCULATED_ABSENCE_COUNT
+    data_type: NUMBER(38,0)
+    access_modifier: public_access
+  - name: NO_SHOW_COUNT
+    description: Number of no-show shift records.
+    expr: NO_SHOW_COUNT
+    data_type: NUMBER(38,0)
+    access_modifier: public_access
+  - name: SOURCE_ESTIMATED_SALES
+    description: Synthetic estimated sales supplied in the source labour table.
+    expr: SOURCE_ESTIMATED_SALES
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: SCHEDULE_VARIANCE_HOURS
+    description: Actual hours less scheduled hours.
+    expr: SCHEDULE_VARIANCE_HOURS
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  - name: OVERTIME_RATE
+    description: Overtime hours divided by actual hours.
+    expr: OVERTIME_RATE
+    data_type: NUMBER(38,8)
+    access_modifier: public_access
+  - name: ABSENCE_RATE
+    description: Absence count divided by scheduled employees.
+    expr: ABSENCE_RATE
+    data_type: NUMBER(38,8)
+    access_modifier: public_access
+  - name: NO_SHOW_RATE
+    description: No-show count divided by scheduled employees.
+    expr: NO_SHOW_RATE
+    data_type: NUMBER(38,8)
+    access_modifier: public_access
+  - name: ESTIMATED_SALES_PER_LABOUR_HOUR
+    description: Estimated sales divided by actual hours.
+    expr: ESTIMATED_SALES_PER_LABOUR_HOUR
+    data_type: NUMBER(38,8)
+    access_modifier: public_access
+  - name: ESTIMATED_LABOUR_COST_RATE
+    description: Labour cost divided by estimated sales.
+    expr: ESTIMATED_LABOUR_COST_RATE
+    data_type: NUMBER(38,8)
+    access_modifier: public_access
+  metrics:
+  - name: TOTAL_DAILY_LABOUR_COST
+    description: Total calculated labour cost.
+    expr: SUM(CALCULATED_LABOUR_COST)
+    access_modifier: public_access
+  - name: TOTAL_DAILY_ACTUAL_HOURS
+    description: Total calculated actual hours.
+    expr: SUM(CALCULATED_ACTUAL_HOURS)
+    access_modifier: public_access
+  - name: TOTAL_DAILY_OVERTIME_HOURS
+    description: Total calculated overtime hours.
+    expr: SUM(CALCULATED_OVERTIME_HOURS)
+    access_modifier: public_access
+  - name: TOTAL_ESTIMATED_SALES
+    description: Total synthetic estimated sales.
+    expr: SUM(SOURCE_ESTIMATED_SALES)
+    access_modifier: public_access
+  - name: AGGREGATE_ESTIMATED_SALES_PER_LABOUR_HOUR
+    description: Estimated sales per actual labour hour.
+    expr: SUM(SOURCE_ESTIMATED_SALES) / NULLIF(SUM(CALCULATED_ACTUAL_HOURS), 0)
+    access_modifier: public_access
+  - name: AGGREGATE_ESTIMATED_LABOUR_COST_RATE
+    description: Labour cost as a proportion of estimated sales.
+    expr: SUM(CALCULATED_LABOUR_COST) / NULLIF(SUM(SOURCE_ESTIMATED_SALES), 0)
+    access_modifier: public_access
+  - name: AGGREGATE_OVERTIME_RATE
+    description: Overtime hours as a proportion of actual hours.
+    expr: SUM(CALCULATED_OVERTIME_HOURS) / NULLIF(SUM(CALCULATED_ACTUAL_HOURS), 0)
+    access_modifier: public_access
+  primary_key:
+    columns:
+    - LABOUR_PERFORMANCE_KEY
+- name: V_OPS_DIM_EMPLOYEES
+  base_table:
+    database: PORTFOLIO_DB
+    schema: MARTS
+    table: V_OPS_DIM_EMPLOYEES
+  dimensions:
+  - name: EMPLOYEE_ID
+    description: Unique employee identifier.
+    expr: EMPLOYEE_ID
+    data_type: VARCHAR(16777216)
+  - name: RESTAURANT_ID
+    description: Home restaurant assigned to the employee.
+    expr: RESTAURANT_ID
+    data_type: NUMBER(38,0)
+  - name: FIRST_NAME
+    description: Employee first name.
+    expr: FIRST_NAME
+    data_type: VARCHAR(16777216)
+  - name: LAST_NAME
+    description: Employee last name.
+    expr: LAST_NAME
+    data_type: VARCHAR(16777216)
+  - name: EMPLOYEE_NAME
+    description: Employee full name.
+    expr: FIRST_NAME || ' ' || LAST_NAME
+    data_type: VARCHAR(16777216)
+  - name: JOB_ROLE
+    description: Employee job role.
+    expr: JOB_ROLE
+    data_type: VARCHAR(16777216)
+  - name: EMPLOYMENT_TYPE
+    description: Employment arrangement such as full-time, part-time, or casual.
+    expr: EMPLOYMENT_TYPE
+    data_type: VARCHAR(16777216)
+  - name: ACTIVE_FLAG
+    description: True when the employee is active.
+    expr: ACTIVE_FLAG
+    data_type: BOOLEAN
+  time_dimensions:
+  - name: HIRE_DATE
+    description: Date the employee was hired.
+    expr: HIRE_DATE
+    data_type: DATE
+  facts:
+  - name: HOURLY_RATE
+    description: Current employee hourly rate.
+    expr: HOURLY_RATE
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  primary_key:
+    columns:
+    - EMPLOYEE_ID
+- name: V_OPS_DIM_SUPPLIERS
+  base_table:
+    database: PORTFOLIO_DB
+    schema: MARTS
+    table: V_OPS_DIM_SUPPLIERS
+  dimensions:
+  - name: SUPPLIER_ID
+    description: Unique supplier identifier.
+    expr: SUPPLIER_ID
+    data_type: VARCHAR(16777216)
+  - name: SUPPLIER_NAME
+    description: Business-friendly supplier name.
+    expr: SUPPLIER_NAME
+    data_type: VARCHAR(16777216)
+  - name: SUPPLIER_CATEGORY
+    description: Supplier category or specialisation.
+    expr: SUPPLIER_CATEGORY
+    data_type: VARCHAR(16777216)
+  - name: STATE
+    description: State in which the supplier operates.
+    expr: STATE
+    data_type: VARCHAR(16777216)
+  - name: ACTIVE_FLAG
+    description: True when the supplier is active.
+    expr: ACTIVE_FLAG
+    data_type: BOOLEAN
+  facts:
+  - name: STANDARD_LEAD_TIME_DAYS
+    description: Standard expected supplier lead time in days.
+    expr: STANDARD_LEAD_TIME_DAYS
+    data_type: NUMBER(38,0)
+    access_modifier: public_access
+  - name: SUPPLIER_RATING
+    description: Overall supplier rating.
+    expr: SUPPLIER_RATING
+    data_type: NUMBER(38,6)
+    access_modifier: public_access
+  primary_key:
+    columns:
+    - SUPPLIER_ID
+- name: V_DIM_DATE
+  base_table:
+    database: PORTFOLIO_DB
+    schema: MARTS
+    table: V_DIM_DATE
+  dimensions:
+  - name: DAY_OF_WEEK_NAME
+    description: Name of the weekday.
+    expr: DAY_OF_WEEK_NAME
+    data_type: VARCHAR(16777216)
+  - name: FY
+    description: Fiscal year.
+    expr: FY
+    data_type: NUMBER(4,0)
+  - name: FY_QUARTER
+    description: Fiscal quarter.
+    expr: FY_QUARTER
+    data_type: NUMBER(1,0)
+  - name: FY_MONTH_NAME
+    description: Fiscal month name.
+    expr: FY_MONTH_NAME
+    data_type: VARCHAR(16777216)
+  time_dimensions:
+  - name: DATE_KEY
+    description: Unique calendar date.
+    expr: DATE_KEY
+    data_type: DATE
+  - name: WEEK_ENDING_SUNDAY
+    description: Week ending Sunday date.
+    expr: WEEK_ENDING_SUNDAY
+    data_type: DATE
+  primary_key:
+    columns:
+    - DATE_KEY
+relationships:
+- name: OPERATIONS_TO_DATE
+  left_table: OPS_FACT_RESTAURANT_OPERATIONS_DAILY
+  right_table: V_DIM_DATE
+  relationship_columns:
+  - left_column: OPERATING_DATE
+    right_column: DATE_KEY
+  join_type: left_outer
+  relationship_type: many_to_one
+- name: INVENTORY_TO_DATE
+  left_table: OPS_FACT_INVENTORY_PERFORMANCE_DAILY
+  right_table: V_DIM_DATE
+  relationship_columns:
+  - left_column: SNAPSHOT_DATE
+    right_column: DATE_KEY
+  join_type: left_outer
+  relationship_type: many_to_one
+- name: WASTAGE_TO_DATE
+  left_table: OPS_FACT_INVENTORY_WASTAGE_DAILY
+  right_table: V_DIM_DATE
+  relationship_columns:
+  - left_column: EVENT_DATE
+    right_column: DATE_KEY
+  join_type: left_outer
+  relationship_type: many_to_one
+- name: DELIVERY_TO_SUPPLIER
+  left_table: OPS_FACT_SUPPLIER_DELIVERY_PERFORMANCE
+  right_table: V_OPS_DIM_SUPPLIERS
+  relationship_columns:
+  - left_column: SUPPLIER_ID
+    right_column: SUPPLIER_ID
+  join_type: left_outer
+  relationship_type: many_to_one
+- name: DELIVERY_TO_DATE
+  left_table: OPS_FACT_SUPPLIER_DELIVERY_PERFORMANCE
+  right_table: V_DIM_DATE
+  relationship_columns:
+  - left_column: ACTUAL_DELIVERY_DATE
+    right_column: DATE_KEY
+  join_type: left_outer
+  relationship_type: many_to_one
+- name: SCORECARD_TO_SUPPLIER
+  left_table: OPS_AGG_SUPPLIER_SCORE_CARD_MONTHLY
+  right_table: V_OPS_DIM_SUPPLIERS
+  relationship_columns:
+  - left_column: SUPPLIER_ID
+    right_column: SUPPLIER_ID
+  join_type: left_outer
+  relationship_type: many_to_one
+- name: SCORECARD_TO_DATE
+  left_table: OPS_AGG_SUPPLIER_SCORE_CARD_MONTHLY
+  right_table: V_DIM_DATE
+  relationship_columns:
+  - left_column: DELIVERY_MONTH
+    right_column: DATE_KEY
+  join_type: left_outer
+  relationship_type: many_to_one
+- name: SHIFT_TO_EMPLOYEE
+  left_table: OPS_FACT_EMPLOYEE_SHIFT_PERFORMANCE
+  right_table: V_OPS_DIM_EMPLOYEES
+  relationship_columns:
+  - left_column: EMPLOYEE_ID
+    right_column: EMPLOYEE_ID
+  join_type: left_outer
+  relationship_type: many_to_one
+- name: SHIFT_TO_DATE
+  left_table: OPS_FACT_EMPLOYEE_SHIFT_PERFORMANCE
+  right_table: V_DIM_DATE
+  relationship_columns:
+  - left_column: SHIFT_DATE
+    right_column: DATE_KEY
+  join_type: left_outer
+  relationship_type: many_to_one
+- name: LABOUR_TO_DATE
+  left_table: OPS_FACT_RESTAURANT_LABOUR_PERFORMANCE
+  right_table: V_DIM_DATE
+  relationship_columns:
+  - left_column: WORK_DATE
+    right_column: DATE_KEY
+  join_type: left_outer
+  relationship_type: many_to_one
